@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { auth, provider } from "./firebase";
+import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import * as routes from "./constants/routes";
 import Home from "./screens/Home";
@@ -22,6 +22,7 @@ function App() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         // user is logged in
+        // console.log(authUser);
         dispatch({
           type: "SET_USER",
           user: authUser,
@@ -39,10 +40,10 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Router>
+    <Router>
+      <Switch>
         {user ? (
-          <Switch>
+          <>
             <Route exact path={routes.DETECT}>
               <Detect />
             </Route>
@@ -51,12 +52,16 @@ function App() {
               <Enroll />
             </Route>
 
+            <Route to={routes.HOME}>
+              <Home />
+            </Route>
+
             <Redirect to={routes.HOME}>
               <Home />
             </Redirect>
-          </Switch>
+          </>
         ) : (
-          <Switch>
+          <>
             <Route exact path={routes.SIGNIN}>
               <Signin />
             </Route>
@@ -65,13 +70,17 @@ function App() {
               <Signup />
             </Route>
 
+            <Route to={routes.WELCOME}>
+              <Welcome />
+            </Route>
+
             <Redirect to={routes.WELCOME}>
               <Welcome />
             </Redirect>
-          </Switch>
+          </>
         )}
-      </Router>
-    </div>
+      </Switch>
+    </Router>
   );
 }
 
