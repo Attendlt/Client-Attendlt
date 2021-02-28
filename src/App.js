@@ -37,7 +37,7 @@ function App() {
     });
 
     return () => {};
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>
@@ -52,7 +52,7 @@ function App() {
               <Enroll />
             </Route>
 
-            <Route to={routes.HOME}>
+            <Route exact path={routes.HOME}>
               <Home />
             </Route>
 
@@ -62,15 +62,15 @@ function App() {
           </>
         ) : (
           <>
-            <Route exact path={routes.SIGNIN}>
+            <Route path={routes.SIGNIN}>
               <Signin />
             </Route>
 
-            <Route exact path={routes.SIGNUP}>
+            <Route path={routes.SIGNUP}>
               <Signup />
             </Route>
 
-            <Route to={routes.WELCOME}>
+            <Route exact path={routes.WELCOME}>
               <Welcome />
             </Route>
 

@@ -29,6 +29,7 @@ function Signup() {
 
             db.collection("users").doc(user?.uid).set({
               name: name,
+              didFinishedSetup: false, // means get the institute id and face features of the student
             });
           }
         })

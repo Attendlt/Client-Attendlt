@@ -1,7 +1,8 @@
 import React from "react";
 
 function Detect() {
-  return <div>detect</div>;
+  return <div>
+  </div>;
 }
 
 export default Detect;
