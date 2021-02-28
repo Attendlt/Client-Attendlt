@@ -1,120 +1,92 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
-import Webcam from "react-webcam";
+import React, {useEffect, useState} from "react";
 import * as faceapi from "face-api.js";
 
 const vidWidth = 720;
 const vidHeight = 560;
 
-const videoConstraints = {
-  width: vidWidth,
-  height: vidHeight,
-  facingMode: "user"
-};
-
 function Enroll() {
-  const webcamRef = useRef(null)
-  const [imgSrc, setImgSrc] = useState("#")
-  const [images, setImages] = useState([])
-  const [showWebcam, setShowWebcam] = useState(true)
+  const [faceDescriptors, setFaceDescriptors] = useState("")
 
-  // first save 25 images in an array of images, then process them to faceapi
-  // save json object to the firebase
-  // handle conditions such "sakal nahi dikh rahi, etc, etc"
-  // use face detector to only store "sakla"
-  // then save it to images array and then repeat the process
+  useEffect(() => {
+    var video = document.querySelector("#video");
 
-  useEffect(()=>{
-    function loadLabeledImages() {
-      const labels = [
-        "UserName",
-      ];
+    const startVideo = () => {
+      var constraints = {
+        audio: false,
+        video: { width: vidWidth, height: vidHeight },
+      };
 
-      return Promise.all(
-          labels.map(async (label) => {
-            const descriptions = [];
-            images.forEach(async (image)=>{
-              const img = await faceapi.fetchImage(
-                  image
-              );
-              console.log(img)
-              const detections = await faceapi
-                  .detectSingleFace(img)
-                  .withFaceLandmarks()
-                  .withFaceDescriptor();
-
-              if(detections?.descriptor){
-                descriptions.push(detections?.descriptor);
-              }
-            })
-            // console.log(descriptions)
-            return new faceapi.LabeledFaceDescriptors(label, descriptions);
+      navigator.mediaDevices
+          .getUserMedia(constraints)
+          .then((stream) => {
+            video.srcObject = stream;
+            video.onloadedmetadata = function (e) {
+              video.play();
+            };
           })
-      );
-    }
-
-    async function capture() {
-      if(imgSrc!=='#'){
-        setImages((oldImages)=>[...oldImages, imgSrc])
-        console.log(images.length)
-        // console.log(webcamRef.current.stream.getVideoTracks()[0])
-        if(images.length >= 4){
-          const stream = webcamRef?.current?.stream?.getVideoTracks()[0]
-          stream?.stop()
-          setShowWebcam(false)
-          const labeledFaceDescriptors = await loadLabeledImages()
-          console.log(labeledFaceDescriptors);
-        }
-      }
-    }
+          .catch(function (err) {
+            console.log(err.name + ": " + err.message);
+          });
+    };
 
     Promise.all([
-      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
+      faceapi.nets.faceLandmark68Net.loadFromUri("./models"),
+      faceapi.nets.faceRecognitionNet.loadFromUri("./models"),
       faceapi.nets.ssdMobilenetv1.loadFromUri("/models"),
-    ]).then(capture);
+    ])
+        .then(startVideo)
+        .catch((err) => console.log(err));
 
-  }, [imgSrc])
+    function processDescriptions() {
+      console.log("video started")
 
-  // const handleUserMedia = () =>{
-  //   const
-  // }
+      const descriptions = [];
 
-  const capture = useCallback(
-      ()=>{
-        const imageSrc = webcamRef?.current?.getScreenshot() || "#"
-        // console.log(imageSrc)
-        setImgSrc(imageSrc)
-      },
-      [webcamRef]
-  )
+      const interval = setInterval(async ()=>{
+        //  save description of images if face detected
+        console.log("interval started")
+        const detections = await faceapi
+            .detectSingleFace(video)
+            .withFaceLandmarks()
+            .withFaceDescriptor()
 
-  return <div>
-    {showWebcam && <Webcam
-                      ref={webcamRef}
-                      audio={false}
-                      videoConstraints={videoConstraints}
-                      height={vidHeight}
-                      width={vidWidth}
-                      screenshotFormat="image/jpg"
-                  />
+        console.log(detections)
+
+        if(detections?.descriptor){
+          descriptions.push(detections.descriptor)
+          console.log(descriptions.length)
+        }
+
+        // send data to firebase and clear interval after gettting 25 face detections
+        if(descriptions.length >= 25){
+          const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors("user name", descriptions);
+          setFaceDescriptors(labeledFaceDescriptors)
+
+          video.pause()
+          video.srcObject = null
+          video.removeEventListener("playing", processDescriptions)
+          clearInterval(interval)
+        }
+      }, 100)
     }
 
-    {/*<video*/}
-    {/*    width={vidWidth}*/}
-    {/*    height={vidHeight}*/}
-    {/*    autoPlay={true}*/}
-    {/*    muted={true}*/}
-    {/*    id="video"*/}
-    {/*/>*/}
+    video.addEventListener('playing', processDescriptions)
+  })
 
-    {/*<canvas id="canvas"></canvas>*/}
+useEffect(()=>{
+  if(faceDescriptors !== ''){
+    console.log(faceDescriptors)
+  }
+}, [faceDescriptors])
 
-    <button onClick={capture}>Capture Photo</button>
-
-    {images.map(img=>{
-      // console.log(img.length)
-      return <img src={img} alt=""/>
-    })}
+  return <div>
+    <video
+        width={vidWidth}
+        height={vidHeight}
+        autoPlay={true}
+        muted={true}
+        id="video"
+    />
   </div>;
 }
 
