@@ -109,7 +109,7 @@ function Enroll() {
           const displaySize = { width: image.width, height: image.height };
           faceapi.matchDimensions(canvas, displaySize);
           const detections = await faceapi
-            .detectAllFaces(image)
+            .detectSingleFace(image)
             .withFaceLandmarks()
             .withFaceDescriptors();
           const resizedDetections = faceapi.resizeResults(
