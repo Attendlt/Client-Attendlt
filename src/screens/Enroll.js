@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import * as faceapi from "face-api.js";
+import { db } from "../firebase";
+import { useStateValue } from "../StateProvider";
+import { useHistory } from "react-router-dom";
 
 const vidWidth = 720;
 const vidHeight = 560;
 
 function Enroll() {
+  // datalayer call
+  const [{ uid }, dispatch] = useStateValue();
+
   const [faceDescriptors, setFaceDescriptors] = useState("");
+
+  const history = useHistory();
 
   useEffect(() => {
     var video = document.querySelector("#video");
@@ -44,37 +52,64 @@ function Enroll() {
 
       const interval = setInterval(async () => {
         //  save description of images if face detected
-        console.log("interval started");
-        const detections = await faceapi
-          .detectSingleFace(video)
-          .withFaceLandmarks()
-          .withFaceDescriptor();
+        if (descriptions.length < 25) {
+          console.log("interval started");
+          const detections = await faceapi
+            .detectSingleFace(video)
+            .withFaceLandmarks()
+            .withFaceDescriptor();
 
-        console.log(detections);
+          console.log(detections);
 
-        if (detections?.descriptor) {
-          descriptions.push(detections.descriptor);
-          console.log(descriptions.length);
-        }
+          if (detections?.descriptor) {
+            descriptions.push(detections.descriptor);
+            console.log(descriptions.length);
+          }
 
-        // send data to firebase and clear interval after gettting 25 face detections
-        if (descriptions.length >= 25) {
-          const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
-            "user name",
-            descriptions
-          );
-          setFaceDescriptors(labeledFaceDescriptors);
+          // send data to firebase and clear interval after gettting 25 face detections
+          if (descriptions.length == 25) {
+            const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
+              "user name",
+              descriptions
+            );
 
-          const stream = video.srcObject;
-          const tracks = stream.getTracks();
+            var JSONstringLabeledFaceDescriptors = "";
 
-          tracks.forEach(function (track) {
-            track.stop();
-          });
+            try {
+              JSONstringLabeledFaceDescriptors = JSON.stringify(
+                labeledFaceDescriptors
+              );
+              console.log(JSONstringLabeledFaceDescriptors);
+              await db
+                .collection("users")
+                .doc(uid)
+                .collection("features")
+                .doc(uid)
+                .set({
+                  data: JSONstringLabeledFaceDescriptors,
+                })
+                .then(() => console.log("data saved"))
+                .catch((e) => console.log("Caused an error: ", e));
+            } catch (e) {
+              console.log(e);
+            }
 
-          video.srcObject = null;
-          clearInterval(interval);
-          video.removeEventListener("playing", processDescriptions);
+            setFaceDescriptors(labeledFaceDescriptors);
+
+            if (video?.srcObject) {
+              const stream = video.srcObject;
+              const tracks = stream.getTracks();
+
+              tracks.forEach(function (track) {
+                track.stop();
+              });
+            }
+
+            video.srcObject = null;
+            clearInterval(interval);
+            video.removeEventListener("playing", processDescriptions);
+            history.replace("/");
+          }
         }
       }, 100);
     }
@@ -91,7 +126,7 @@ function Enroll() {
         document.body.append(container);
         const labeledFaceDescriptors = faceDescriptors;
         // console.log(loadLabeledImages)
-        console.log(labeledFaceDescriptors); // store this returned data to firebase
+        // console.log(labeledFaceDescriptors); // store this returned data to firebase
         const faceMatcher = new faceapi.FaceMatcher(
           labeledFaceDescriptors,
           0.6

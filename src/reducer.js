@@ -1,5 +1,6 @@
 export const initialState = {
   user: null,
+  uid: null,
 };
 
 export const actionTypes = {
@@ -14,6 +15,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+        uid: action?.user?.uid || null,
       };
     default:
       return state;
