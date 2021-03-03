@@ -67,7 +67,7 @@ function Enroll() {
           }
 
           // send data to firebase and clear interval after gettting 25 face detections
-          if (descriptions.length == 25) {
+          if (descriptions.length === 25) {
             const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
               "user name",
               descriptions
