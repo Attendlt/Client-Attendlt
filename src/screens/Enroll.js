@@ -3,16 +3,18 @@ import * as faceapi from "face-api.js";
 import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router-dom";
+import * as image from "../test-img.jpg";
 
 const vidWidth = 720;
 const vidHeight = 560;
 
 function Enroll() {
   // datalayer call
+  const [
+    JSONstrLabeledFaceDescriptors,
+    setJSONstrLabeledFaceDescriptors,
+  ] = useState("");
   const [{ uid }, dispatch] = useStateValue();
-
-  const [faceDescriptors, setFaceDescriptors] = useState("");
-
   const history = useHistory();
 
   useEffect(() => {
@@ -53,13 +55,13 @@ function Enroll() {
       const interval = setInterval(async () => {
         //  save description of images if face detected
         if (descriptions.length < 25) {
-          console.log("interval started");
+          // console.log("interval started");
           const detections = await faceapi
             .detectSingleFace(video)
             .withFaceLandmarks()
             .withFaceDescriptor();
 
-          console.log(detections);
+          // console.log(detections);
 
           if (detections?.descriptor) {
             descriptions.push(detections.descriptor);
@@ -67,19 +69,23 @@ function Enroll() {
           }
 
           // send data to firebase and clear interval after gettting 25 face detections
-          if (descriptions.length == 25) {
+          if (descriptions.length === 25) {
             const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
               "user name",
               descriptions
             );
 
-            var JSONstringLabeledFaceDescriptors = "";
-
             try {
+              var JSONstringLabeledFaceDescriptors = "";
+              const JSONlabeledFaceDescriptors = labeledFaceDescriptors.toJSON();
               JSONstringLabeledFaceDescriptors = JSON.stringify(
-                labeledFaceDescriptors
+                JSONlabeledFaceDescriptors
               );
-              console.log(JSONstringLabeledFaceDescriptors);
+
+              setJSONstrLabeledFaceDescriptors(
+                JSONstringLabeledFaceDescriptors
+              );
+
               await db
                 .collection("users")
                 .doc(uid)
@@ -94,8 +100,6 @@ function Enroll() {
               console.log(e);
             }
 
-            setFaceDescriptors(labeledFaceDescriptors);
-
             if (video?.srcObject) {
               const stream = video.srcObject;
               const tracks = stream.getTracks();
@@ -108,7 +112,7 @@ function Enroll() {
             video.srcObject = null;
             clearInterval(interval);
             video.removeEventListener("playing", processDescriptions);
-            history.replace("/");
+            // history.replace("/");
           }
         }
       }, 100);
@@ -118,15 +122,18 @@ function Enroll() {
   });
 
   useEffect(() => {
-    var imageUpload = document.querySelector("#imageUpload");
-    if (faceDescriptors !== "") {
-      async function start() {
+    if (JSONstrLabeledFaceDescriptors !== "") {
+      const imageUpload = document.getElementById("imageUpload");
+
+      const parseJSONstr = JSON.parse(JSONstrLabeledFaceDescriptors);
+
+      const runFunc = async () => {
         const container = document.createElement("div");
         container.style.position = "relative";
         document.body.append(container);
-        const labeledFaceDescriptors = faceDescriptors;
-        // console.log(loadLabeledImages)
-        // console.log(labeledFaceDescriptors); // store this returned data to firebase
+        const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
+          parseJSONstr
+        );
         const faceMatcher = new faceapi.FaceMatcher(
           labeledFaceDescriptors,
           0.6
@@ -144,7 +151,7 @@ function Enroll() {
           const displaySize = { width: image.width, height: image.height };
           faceapi.matchDimensions(canvas, displaySize);
           const detections = await faceapi
-            .detectSingleFace(image)
+            .detectAllFaces(image)
             .withFaceLandmarks()
             .withFaceDescriptors();
           const resizedDetections = faceapi.resizeResults(
@@ -159,14 +166,16 @@ function Enroll() {
             const drawBox = new faceapi.draw.DrawBox(box, {
               label: result.toString(),
             });
+            console.log(result);
             drawBox.draw(canvas);
           });
         });
-      }
+      };
 
-      start();
+      runFunc();
     }
-  }, [faceDescriptors]);
+    return () => {};
+  }, [JSONstrLabeledFaceDescriptors]);
 
   return (
     <div>
@@ -177,6 +186,7 @@ function Enroll() {
         muted={true}
         id="video"
       />
+
       <input type="file" id="imageUpload" />
     </div>
   );
