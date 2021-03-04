@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
 import { useStateValue } from "../StateProvider";
-
+import Nav from '../components/header';
 function Signup() {
   const [{ user }, dispatch] = useStateValue();
 
@@ -39,7 +39,10 @@ function Signup() {
   };
 
   return (
-    <div className="container mt-4">
+      <><Nav/>
+    <div className="container mt-4"style={{width:'70%',padding:'10%'}}>
+          <h2 style={{color:'grey',textAlign:'center',textDecoration:'bold'}}>Welcome to The Attendlt!</h2>
+          <h3 style={{color:'#ff3300',textAlign:'center',textDecoration:'bold'}}>You need to fill the following details to register!</h3>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Name</Form.Label>
@@ -74,7 +77,7 @@ function Signup() {
           Submit
         </Button>
       </Form>
-    </div>
+    </div></>
   );
 }
 
