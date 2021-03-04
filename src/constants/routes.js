@@ -4,3 +4,5 @@ export const SIGNUP = "/signup";
 export const SIGNIN = "/signin";
 export const DETECT = "/detect";
 export const ENROLL = "/enroll";
+export const FEATURE="/feature";
+export const ABOUT="/about";
