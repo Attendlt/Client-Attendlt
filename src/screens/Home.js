@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import * as routes from '../constants/routes'
+import * as routes from "../constants/routes";
 import { auth } from "../firebase";
 
 function Home() {
-  const handleSignout = ()=>{
-    auth.signOut()
-  }
+  const handleSignout = () => {
+    auth.signOut();
+  };
 
-  return <div>render this page please
-    <button onClick={handleSignout}>
-      Signout
-    </button>
-
-    <Link to={routes.ENROLL}>Enroll</Link>
-    <Link to={routes.DETECT}>Detect</Link>
-  </div>;
+  return (
+    <div>
+      render this page please
+      <button onClick={handleSignout}>Signout</button>
+      <Link to={routes.ENROLL}>Enroll</Link>
+      <Link to={routes.DETECT}>Detect</Link>
+    </div>
+  );
 }
 
 export default Home;

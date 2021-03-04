@@ -3,7 +3,6 @@ import * as faceapi from "face-api.js";
 import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router-dom";
-import * as image from "../test-img.jpg";
 
 const vidWidth = 720;
 const vidHeight = 560;
@@ -14,7 +13,7 @@ function Enroll() {
     JSONstrLabeledFaceDescriptors,
     setJSONstrLabeledFaceDescriptors,
   ] = useState("");
-  const [{ uid }, dispatch] = useStateValue();
+  const [{ uid }] = useStateValue();
   const history = useHistory();
 
   useEffect(() => {
@@ -89,10 +88,8 @@ function Enroll() {
               await db
                 .collection("users")
                 .doc(uid)
-                .collection("features")
-                .doc(uid)
                 .set({
-                  data: JSONstringLabeledFaceDescriptors,
+                  features: JSONstringLabeledFaceDescriptors,
                 })
                 .then(() => console.log("data saved"))
                 .catch((e) => console.log("Caused an error: ", e));
@@ -100,18 +97,22 @@ function Enroll() {
               console.log(e);
             }
 
-            if (video?.srcObject) {
-              const stream = video.srcObject;
-              const tracks = stream.getTracks();
+            try {
+              if (video?.srcObject) {
+                const stream = video.srcObject;
+                const tracks = stream.getTracks();
 
-              tracks.forEach(function (track) {
-                track.stop();
-              });
+                tracks.forEach(function (track) {
+                  track.stop();
+                });
+                video.srcObject = null;
+                clearInterval(interval);
+                video.removeEventListener("playing", processDescriptions);
+              }
+            } catch (e) {
+              console.log(e);
             }
 
-            video.srcObject = null;
-            clearInterval(interval);
-            video.removeEventListener("playing", processDescriptions);
             // history.replace("/");
           }
         }
