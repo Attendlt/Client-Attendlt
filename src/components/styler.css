@@ -1,12 +1,11 @@
-.footer{
-    margin-top: 1rem;
-    padding: 1rem;
-    color:antiquewhite;
-    background-color:rgb(240, 54, 37);
+.main-footer{
+    /* margin-top: 1rem; */
+    /* padding: 1rem; */
+    color:whitesmoke;
+    background-color:rgb(6, 24, 39);
     box-shadow: inset 0 0.2 0.2 0.8 grey;
-    position: fixed;
+    position:fixed;
     bottom: 0;
-    left: 0;
+
     width: 100%;
   }
-  
