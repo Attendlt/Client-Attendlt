@@ -19,15 +19,14 @@ const FooterPage = () => {
               <h5 className="title" style={{ color: "rgb(73, 240, 240)" }}>
                 Team Members: IIIT Pune
               </h5>
-              <p>
+              
                 <ul>
                   <li className="ls=ist-unstyled">Swarnim Pratap Singh</li>
                   <li className="ls=ist-unstyled">Vimal Gupta</li>
                   <li className="ls=ist-unstyled">Sakshi Ramsinghani</li>
                   <li className="ls=ist-unstyled">Aditi Dwivedi</li>
                 </ul>
-              </p>
-            </MDBCol>
+              </MDBCol>
 
             <MDBCol md="4">
               <h5 className="title">{tagline}:Virtualising the future</h5>
@@ -37,7 +36,6 @@ const FooterPage = () => {
                 instagram, email and GitHub. We strive to provide proactive
                 support before even you reach out to us!
               </h6>
-              <p></p>
             </MDBCol>
 
             <MDBCol md="4">
