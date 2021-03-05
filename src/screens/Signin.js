@@ -57,7 +57,7 @@ function Signin() {
                 onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button type="submit" style={{width:'45%',marginLeft:'25%',background:'#ff3300'}}>
             Submit
           </Button>
         </Form>
