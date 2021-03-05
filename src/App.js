@@ -14,6 +14,10 @@ import Enroll from "./screens/Enroll";
 import Detect from "./screens/Detect";
 import Signin from "./screens/Signin";
 import Signup from "./screens/Signup";
+import Features from "./screens/Features";
+import About from "./screens/About";
+import FooterPage from "./components/Footer";
+import Head from "./components/Header";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -41,7 +45,17 @@ function App() {
 
   return (
     <Router>
+      <Head />
+
       <Switch>
+        <Route exact path={routes.FEATURE}>
+          <Features />
+        </Route>
+
+        <Route exact path={routes.ABOUT}>
+          <About />
+        </Route>
+
         {user ? (
           <>
             <Route exact path={routes.DETECT}>
@@ -80,6 +94,8 @@ function App() {
           </>
         )}
       </Switch>
+
+      <FooterPage />
     </Router>
   );
 }

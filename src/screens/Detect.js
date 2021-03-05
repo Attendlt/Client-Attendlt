@@ -72,7 +72,7 @@ function Detect() {
       .catch((err) => console.log(err));
 
     return () => {};
-  }, []);
+  }, [dispatch, features, uid]);
 
   useEffect(() => {
     if (userFeatures !== null) {
@@ -136,7 +136,7 @@ function Detect() {
         }
 
         const interval = setInterval(() => {
-          if (recogRes.length == 5) {
+          if (recogRes.length === 5) {
             stopStream();
             let cnt = 0;
 
