@@ -68,21 +68,21 @@ function Signup() {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group>
             <Form.Label>Institute ID</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter InstituteID"
               value={InsId}
               onChange={(e) => setInsId(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
 
