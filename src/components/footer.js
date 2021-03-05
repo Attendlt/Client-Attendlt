@@ -14,10 +14,10 @@ const FooterPage = () => {
                         <h5 className="title" style={{color:'rgb(73, 240, 240)'}}>Team Members: IIIT Pune</h5>
                         <p>
                            <ul>
+                               <li className="ls=ist-unstyled">Swarnim Pratap Singh</li>
                                <li className="ls=ist-unstyled">Vimal Gupta</li>
                                <li className="ls=ist-unstyled">Sakshi Ramsinghani</li>
                                <li className="ls=ist-unstyled">Aditi Dwivedi</li>
-                               <li className="ls=ist-unstyled">Swarnim Pratap Singh</li>
                            </ul>
 
             </p>

@@ -9,6 +9,19 @@ function Welcome() {
         <div style={{ margin: '3rem' }}>
             <Nav />
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+       
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <Footer />
     </>
     );
