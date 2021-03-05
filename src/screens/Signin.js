@@ -3,6 +3,7 @@ import { auth } from "../firebase";
 import { Form, Button } from "react-bootstrap";
 import { useStateValue } from "../StateProvider";
 import Nav from '../components/header';
+import Footer from '../components/footer';
 function Signin() {
   const [{ user }, dispatch] = useStateValue();
 
@@ -61,7 +62,7 @@ function Signin() {
             Submit
           </Button>
         </Form>
-      </div></div>
+      </div><Footer/></div>
   );
 }
 

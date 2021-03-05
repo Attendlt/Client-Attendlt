@@ -4,7 +4,7 @@
     color:whitesmoke;
     background-color:rgb(6, 24, 39);
     box-shadow: inset 0 0.2 0.2 0.8 grey;
-    position:fixed;
+    position:relative;
     bottom: 0;
 
     width: 100%;

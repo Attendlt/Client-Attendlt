@@ -11,7 +11,7 @@ const FooterPage = () => {
             <MDBContainer fluid className="text-center text-md-left">
                 <MDBRow>
                     <MDBCol md="4">
-                        <h5 className="title">Team Members: IIIT Pune</h5>
+                        <h5 className="title" style={{color:'rgb(73, 240, 240)'}}>Team Members: IIIT Pune</h5>
                         <p>
                            <ul>
                                <li className="ls=ist-unstyled">Vimal Gupta</li>
@@ -24,7 +24,7 @@ const FooterPage = () => {
                     </MDBCol>
                      <MDBCol md="4">
                         <h5 className="title">{tagline}:Virtualising the future</h5>
-                       <h6 style={{color:"teal"}}> Our support team is available via various channels like dedicated phone hotline, email and chat. We strive to provide proactive support before even you reach out to us!</h6> 
+                       <h6 style={{color:"grey"}}> Our support team is available via various channels like  instagram, email and GitHub. We strive to provide proactive support before even you reach out to us!</h6> 
                         <p>
             </p>
                     </MDBCol>
