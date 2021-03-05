@@ -7,6 +7,7 @@ function Signup() {
   const [{ user }, dispatch] = useStateValue();
 
   const [name, setName] = useState("");
+  const [InsId, setInsId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,7 +17,7 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name && email && password) {
+    if (name && email && password&&InsId) {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
@@ -73,6 +74,15 @@ function Signup() {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Institute ID</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter InstituteID"
+              value={InsId}
+              onChange={(e) => setInsId(e.target.value)}
             />
           </Form.Group>
 
