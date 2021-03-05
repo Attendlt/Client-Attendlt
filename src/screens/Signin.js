@@ -13,17 +13,17 @@ function Signin() {
     return () => {};
   }, [user]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      auth
+      await auth
         .signInWithEmailAndPassword(email, password)
         .then((authUser) => {
           if (authUser) {
-            const user = authUser?.user;
+            const uid = authUser?.user?.uid;
             dispatch({
-              type: "SET_USER",
-              user: user,
+              type: "SET_UID",
+              uid: uid,
             });
           }
         })

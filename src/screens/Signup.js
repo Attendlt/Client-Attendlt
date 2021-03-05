@@ -1,36 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
 import { useStateValue } from "../StateProvider";
 
 function Signup() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    return () => {};
-  }, [user]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (name && email && password) {
       auth
         .createUserWithEmailAndPassword(email, password)
-        .then((authUser) => {
+        .then(async (authUser) => {
           if (authUser) {
-            const user = authUser?.user;
+            const uid = authUser?.user?.uid;
             dispatch({
-              type: "SET_USER",
-              user: user,
+              type: "SET_UID",
+              uid: uid,
             });
 
-            db.collection("users").doc(user?.uid).set({
+            db.collection("users").doc(uid).set({
               name: name,
-              finishedSetup: false, // means get the institute id and face features of the student
-              features: null,
+              finishedSetup: false,
+              features: null, // means get the institute id and face features of the student
+              collegeId: null,
             });
           }
         })

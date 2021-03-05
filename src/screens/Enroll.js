@@ -4,16 +4,13 @@ import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { useHistory } from "react-router-dom";
 
-const vidWidth = 720;
-const vidHeight = 560;
-
 function Enroll() {
   // datalayer call
-  const [
-    JSONstrLabeledFaceDescriptors,
-    setJSONstrLabeledFaceDescriptors,
-  ] = useState("");
-  const [{ uid }] = useStateValue();
+  // const [
+  //   JSONstrLabeledFaceDescriptors,
+  //   setJSONstrLabeledFaceDescriptors,
+  // ] = useState("");
+  const [{ uid }, dispatch] = useStateValue();
   const history = useHistory();
 
   useEffect(() => {
@@ -22,7 +19,7 @@ function Enroll() {
     const startVideo = () => {
       var constraints = {
         audio: false,
-        video: { width: vidWidth, height: vidHeight },
+        video: true,
       };
 
       navigator.mediaDevices
@@ -81,17 +78,26 @@ function Enroll() {
                 JSONlabeledFaceDescriptors
               );
 
-              setJSONstrLabeledFaceDescriptors(
-                JSONstringLabeledFaceDescriptors
-              );
+              // setJSONstrLabeledFaceDescriptors(
+              //   JSONstringLabeledFaceDescriptors
+              // );
 
               await db
                 .collection("users")
                 .doc(uid)
-                .set({
+                .update({
                   features: JSONstringLabeledFaceDescriptors,
+                  finishedSetup: true,
                 })
-                .then(() => console.log("data saved"))
+                .then(() => {
+                  console.log("data saved");
+
+                  dispatch({
+                    type: "SET_FEATURES",
+                    features: JSONstringLabeledFaceDescriptors,
+                    finishedSetup: true,
+                  });
+                })
                 .catch((e) => console.log("Caused an error: ", e));
             } catch (e) {
               console.log(e);
@@ -113,7 +119,7 @@ function Enroll() {
               console.log(e);
             }
 
-            // history.replace("/");
+            history.replace("/");
           }
         }
       }, 100);
@@ -122,73 +128,67 @@ function Enroll() {
     video.addEventListener("playing", processDescriptions);
   });
 
-  useEffect(() => {
-    if (JSONstrLabeledFaceDescriptors !== "") {
-      const imageUpload = document.getElementById("imageUpload");
+  // useEffect(() => {
+  //   if (JSONstrLabeledFaceDescriptors !== "") {
+  //     const imageUpload = document.getElementById("imageUpload");
 
-      const parseJSONstr = JSON.parse(JSONstrLabeledFaceDescriptors);
+  //     const parseJSONstr = JSON.parse(JSONstrLabeledFaceDescriptors);
 
-      const runFunc = async () => {
-        const container = document.createElement("div");
-        container.style.position = "relative";
-        document.body.append(container);
-        const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
-          parseJSONstr
-        );
-        const faceMatcher = new faceapi.FaceMatcher(
-          labeledFaceDescriptors,
-          0.6
-        );
-        let image;
-        let canvas;
-        document.body.append("Loaded");
-        imageUpload.addEventListener("change", async () => {
-          if (image) image.remove();
-          if (canvas) canvas.remove();
-          image = await faceapi.bufferToImage(imageUpload.files[0]);
-          container.append(image);
-          canvas = faceapi.createCanvasFromMedia(image);
-          container.append(canvas);
-          const displaySize = { width: image.width, height: image.height };
-          faceapi.matchDimensions(canvas, displaySize);
-          const detections = await faceapi
-            .detectAllFaces(image)
-            .withFaceLandmarks()
-            .withFaceDescriptors();
-          const resizedDetections = faceapi.resizeResults(
-            detections,
-            displaySize
-          );
-          const results = resizedDetections.map((d) =>
-            faceMatcher.findBestMatch(d.descriptor)
-          );
-          results.forEach((result, i) => {
-            const box = resizedDetections[i].detection.box;
-            const drawBox = new faceapi.draw.DrawBox(box, {
-              label: result.toString(),
-            });
-            console.log(result);
-            drawBox.draw(canvas);
-          });
-        });
-      };
+  //     const runFunc = async () => {
+  //       const container = document.createElement("div");
+  //       container.style.position = "relative";
+  //       document.body.append(container);
+  //       const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
+  //         parseJSONstr
+  //       );
+  //       const faceMatcher = new faceapi.FaceMatcher(
+  //         labeledFaceDescriptors,
+  //         0.6
+  //       );
+  //       let image;
+  //       let canvas;
+  //       document.body.append("Loaded");
+  //       imageUpload.addEventListener("change", async () => {
+  //         if (image) image.remove();
+  //         if (canvas) canvas.remove();
+  //         image = await faceapi.bufferToImage(imageUpload.files[0]);
+  //         container.append(image);
+  //         canvas = faceapi.createCanvasFromMedia(image);
+  //         container.append(canvas);
+  //         const displaySize = { width: image.width, height: image.height };
+  //         faceapi.matchDimensions(canvas, displaySize);
+  //         const detections = await faceapi
+  //           .detectAllFaces(image)
+  //           .withFaceLandmarks()
+  //           .withFaceDescriptors();
+  //         const resizedDetections = faceapi.resizeResults(
+  //           detections,
+  //           displaySize
+  //         );
+  //         const results = resizedDetections.map((d) =>
+  //           faceMatcher.findBestMatch(d.descriptor)
+  //         );
+  //         results.forEach((result, i) => {
+  //           const box = resizedDetections[i].detection.box;
+  //           const drawBox = new faceapi.draw.DrawBox(box, {
+  //             label: result.toString(),
+  //           });
+  //           console.log(result);
+  //           drawBox.draw(canvas);
+  //         });
+  //       });
+  //     };
 
-      runFunc();
-    }
-    return () => {};
-  }, [JSONstrLabeledFaceDescriptors]);
+  //     runFunc();
+  //   }
+  //   return () => {};
+  // }, [JSONstrLabeledFaceDescriptors]);
 
   return (
     <div>
-      <video
-        width={vidWidth}
-        height={vidHeight}
-        autoPlay={true}
-        muted={true}
-        id="video"
-      />
+      <video autoPlay={true} muted={true} id="video" />
 
-      <input type="file" id="imageUpload" />
+      {/* <input type="file" id="imageUpload" /> */}
     </div>
   );
 }

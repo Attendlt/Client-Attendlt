@@ -1,14 +1,14 @@
 export const initialState = {
-  user: null,
   uid: null,
   features: null,
   name: null,
   collegeId: null,
+  finishedSetup: false,
 };
 
 export const actionTypes = {
+  SET_UID: "SET_UID",
   SET_USER: "SET_USER",
-  SET_USERDATA: "SET_USERDATA",
   SET_FEATURES: "SET_FEATURES",
 };
 
@@ -16,14 +16,13 @@ const reducer = (state, action) => {
   // console.log(action);
 
   switch (action.type) {
-    case actionTypes.SET_USER:
+    case actionTypes.SET_UID:
       return {
         ...state,
-        user: action.user,
-        uid: action?.user?.uid || null,
+        uid: action.uid,
       };
 
-    case actionTypes.SET_USERDATA:
+    case actionTypes.SET_USER:
       return {
         ...state,
         features: action.features,
@@ -35,6 +34,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         features: action.features,
+        finishedSetup: true,
       };
 
     default:
