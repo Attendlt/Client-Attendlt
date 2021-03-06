@@ -129,7 +129,7 @@ function Detect() {
           );
 
           results.forEach((result, i) => {
-            if (result.label === name) recogRes.push(true);
+            if (result.label === "user name") recogRes.push(true);
             else recogRes.push(false);
           });
         }

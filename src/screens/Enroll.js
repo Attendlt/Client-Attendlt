@@ -53,7 +53,7 @@ function Enroll() {
 
       const trainImages = async () => {
         const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
-          name,
+          "user name",
           descriptions
         );
 
