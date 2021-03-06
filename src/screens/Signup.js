@@ -1,28 +1,21 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
-import { useStateValue } from "../StateProvider";
 
 function Signup() {
-  const [dispatch] = useStateValue();
-
-  const [name, setName] = useState("");
-  const [InsId, setInsId] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState(null);
+  const [InsId, setInsId] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (name && email && password && InsId) {
-      auth
+      await auth
         .createUserWithEmailAndPassword(email, password)
         .then(async (authUser) => {
           if (authUser) {
             const uid = authUser?.user?.uid;
-            dispatch({
-              type: "SET_UID",
-              uid: uid,
-            });
 
             db.collection("users").doc(uid).set({
               name: name,
@@ -31,6 +24,8 @@ function Signup() {
               collegeId: InsId,
             });
           }
+
+          console.log("fuck off from here");
         })
         .catch((err) => console.log(err));
     }

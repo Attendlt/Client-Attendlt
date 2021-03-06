@@ -1,30 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { auth } from "../firebase";
 import { Form, Button } from "react-bootstrap";
-import { useStateValue } from "../StateProvider";
 
 function Signin() {
-  const [{ user }, dispatch] = useStateValue();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    return () => {};
-  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
       await auth
         .signInWithEmailAndPassword(email, password)
-        .then((authUser) => {
+        .then(async (authUser) => {
           if (authUser) {
-            const uid = authUser?.user?.uid;
-            dispatch({
-              type: "SET_UID",
-              uid: uid,
-            });
+            console.log("fuck off from here");
           }
         })
         .catch((err) => console.log(err));

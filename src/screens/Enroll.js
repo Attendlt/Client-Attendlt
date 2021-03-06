@@ -2,16 +2,12 @@ import React, { useEffect } from "react";
 import * as faceapi from "face-api.js";
 import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
 
 function Enroll() {
-  // datalayer call
-  // const [
-  //   JSONstrLabeledFaceDescriptors,
-  //   setJSONstrLabeledFaceDescriptors,
-  // ] = useState("");
   const [{ name, uid, finishedSetup }, dispatch] = useStateValue();
+  const history = useHistory();
 
   useEffect(() => {
     var video = document.querySelector("#video");
@@ -30,6 +26,76 @@ function Enroll() {
         console.log("Video doesn't have any src");
       }
     }
+
+    const onVideoStarted = async () => {
+      console.log("video started");
+
+      const descriptions = [];
+
+      const trainImages = async () => {
+        const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
+          name,
+          descriptions
+        );
+
+        var JSONstringLabeledFaceDescriptors = "";
+        const JSONlabeledFaceDescriptors = labeledFaceDescriptors.toJSON();
+        JSONstringLabeledFaceDescriptors = JSON.stringify(
+          JSONlabeledFaceDescriptors
+        );
+
+        await db
+          .collection("users")
+          .doc(uid)
+          .update({
+            features: JSONstringLabeledFaceDescriptors,
+            finishedSetup: true,
+          })
+          .then(() => {
+            console.log("data saved");
+
+            dispatch({
+              type: "SET_FEATURES",
+              features: JSONstringLabeledFaceDescriptors,
+              finishedSetup: true,
+            });
+          })
+          .catch((e) => console.log("Caused a firebase error: ", e));
+      };
+
+      const interval = setInterval(async () => {
+        // send data to firebase and clear interval after gettting 25 face detections
+        if (descriptions.length === 25) {
+          try {
+            trainImages();
+
+            // stop webcam
+            stopStream();
+            clearInterval(interval);
+          } catch (e) {
+            console.log(e);
+          }
+        }
+
+        try {
+          //  save description of images if face detected
+          // console.log("interval started");
+          const detections = await faceapi
+            .detectSingleFace(video)
+            .withFaceLandmarks()
+            .withFaceDescriptor();
+
+          // console.log(detections);
+
+          if (detections?.descriptor) {
+            descriptions.push(detections.descriptor);
+            console.log(descriptions.length);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }, 100);
+    };
 
     if (!finishedSetup) {
       const startVideo = () => {
@@ -60,83 +126,19 @@ function Enroll() {
         .catch((err) => console.log(err));
 
       // start detecting faces and save them after getting src from webcam
-      video.addEventListener("playing", async () => {
-        console.log("video started");
 
-        const descriptions = [];
-
-        const trainImages = async () => {
-          const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
-            name,
-            descriptions
-          );
-
-          var JSONstringLabeledFaceDescriptors = "";
-          const JSONlabeledFaceDescriptors = labeledFaceDescriptors.toJSON();
-          JSONstringLabeledFaceDescriptors = JSON.stringify(
-            JSONlabeledFaceDescriptors
-          );
-
-          // setJSONstrLabeledFaceDescriptors(
-          //   JSONstringLabeledFaceDescriptors
-          // );
-
-          await db
-            .collection("users")
-            .doc(uid)
-            .update({
-              features: JSONstringLabeledFaceDescriptors,
-              finishedSetup: true,
-            })
-            .then(() => {
-              console.log("data saved");
-
-              dispatch({
-                type: "SET_FEATURES",
-                features: JSONstringLabeledFaceDescriptors,
-                finishedSetup: true,
-              });
-            })
-            .catch((e) => console.log("Caused a firebase error: ", e));
-        };
-
-        const interval = setInterval(async () => {
-          // send data to firebase and clear interval after gettting 25 face detections
-          if (descriptions.length === 25) {
-            try {
-              trainImages();
-
-              // stop webcam
-              stopStream();
-              clearInterval(interval);
-            } catch (e) {
-              console.log(e);
-            }
-          }
-
-          try {
-            //  save description of images if face detected
-            // console.log("interval started");
-            const detections = await faceapi
-              .detectSingleFace(video)
-              .withFaceLandmarks()
-              .withFaceDescriptor();
-
-            // console.log(detections);
-
-            if (detections?.descriptor) {
-              descriptions.push(detections.descriptor);
-              console.log(descriptions.length);
-            }
-          } catch (e) {
-            console.log(e);
-          }
-        }, 100);
-      });
-    } else {
-      stopStream();
+      video.addEventListener("playing", onVideoStarted);
     }
-  }, [finishedSetup, dispatch, name, uid]);
+    // else {
+    //   stopStream();
+    //   history.push(routes.HOME);
+    // }
+
+    return () => {
+      video.removeEventListener("playing", onVideoStarted);
+      history.push(routes.HOME);
+    };
+  }, [finishedSetup, dispatch, name, uid, history]);
 
   return finishedSetup ? (
     <Redirect to={routes.HOME} />
