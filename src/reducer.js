@@ -28,6 +28,7 @@ const reducer = (state, action) => {
         features: action.features,
         name: action.name,
         collegeId: action.collegeId,
+        finishedSetup: action.finishedSetup,
       };
 
     case actionTypes.SET_FEATURES:

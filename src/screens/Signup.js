@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { useStateValue } from "../StateProvider";
 
 function Signup() {
-  const [{}, dispatch] = useStateValue();
+  const [dispatch] = useStateValue();
 
   const [name, setName] = useState("");
   const [InsId, setInsId] = useState("");
@@ -13,7 +13,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name && email && password&&InsId) {
+    if (name && email && password && InsId) {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then(async (authUser) => {
@@ -28,7 +28,7 @@ function Signup() {
               name: name,
               finishedSetup: false,
               features: null, // means get the institute id and face features of the student
-              collegeId: null,
+              collegeId: InsId,
             });
           }
         })
@@ -73,6 +73,7 @@ function Signup() {
               onChange={(e) => setInsId(e.target.value)}
             />
           </Form.Group>
+
           <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control

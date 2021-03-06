@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as faceapi from "face-api.js";
 import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
@@ -15,8 +15,7 @@ import { useStateValue } from "../StateProvider";
  */
 
 function Detect() {
-  const [userFeatures, setUserFeatures] = useState(null);
-  const [{ uid, features }, dispatch] = useStateValue();
+  const [{ uid, features, name }, dispatch] = useStateValue();
 
   useEffect(() => {
     // database queries
@@ -28,12 +27,10 @@ function Detect() {
             data = data.data();
 
             dispatch({
-              type: "SET_USERDATA",
+              type: "SET_FEATURES",
               features: data.features,
-              name: data.name,
+              finishedSetup: true,
             });
-
-            setUserFeatures(data.features);
           }
         } catch (e) {
           console.log(e);
@@ -75,7 +72,7 @@ function Detect() {
   }, [dispatch, features, uid]);
 
   useEffect(() => {
-    if (userFeatures !== null) {
+    if (features !== null) {
       var video = document.querySelector("#video");
 
       function stopStream() {
@@ -96,7 +93,7 @@ function Detect() {
       video.addEventListener("playing", async () => {
         console.log("Playing");
 
-        const parsedUserFeatures = JSON.parse(userFeatures);
+        const parsedUserFeatures = JSON.parse(features);
 
         const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
           parsedUserFeatures
@@ -130,7 +127,7 @@ function Detect() {
           );
 
           results.forEach((result, i) => {
-            if (result.label === "user name") recogRes.push(true);
+            if (result.label === name) recogRes.push(true);
             else recogRes.push(false);
           });
         }
@@ -155,7 +152,7 @@ function Detect() {
     }
 
     return () => {};
-  }, [userFeatures]);
+  }, [features, name]);
 
   return (
     <div>

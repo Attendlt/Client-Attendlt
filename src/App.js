@@ -47,6 +47,7 @@ function App() {
                     features: data.features,
                     name: data.name,
                     collegeId: data.collegeId,
+                    finishedSetup: data.finishedSetup,
                   });
                 }
               } catch (e) {
