@@ -27,9 +27,11 @@ function Detect() {
             data = data.data();
 
             dispatch({
-              type: "SET_FEATURES",
+              type: "SET_USER",
               features: data.features,
-              finishedSetup: true,
+              name: data.name,
+              collegeId: data.collegeId,
+              finishedSetup: data.finishedSetup,
             });
           }
         } catch (e) {

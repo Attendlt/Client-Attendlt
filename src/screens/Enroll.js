@@ -10,6 +10,25 @@ function Enroll() {
   const history = useHistory();
 
   useEffect(() => {
+    const initialSetup = async () => {
+      if (!name) {
+        var data = await db.collection("users").doc(uid).get();
+
+        if (data.exists) {
+          data = data.data();
+
+          dispatch({
+            type: "SET_USER",
+            features: data.features,
+            name: data.name,
+            collegeId: data.collegeId,
+            finishedSetup: data.finishedSetup,
+          });
+        }
+      }
+    };
+    initialSetup();
+
     var video = document.querySelector("#video");
 
     function stopStream() {
