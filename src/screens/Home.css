@@ -1,0 +1,142 @@
+*{
+  box-sizing: border-box;
+}
+body,html{
+
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.bg-img{
+
+   /* The image used */
+/**background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdST08B3wUL_Cnicy9WhpkXbaj6dyV9DsoPw&usqp=CAU");**/
+background-image:url("https://freedesignfile.com/upload/2017/08/White-office-space-meeting-room-table-Stock-Photo-12.jpg");
+height: 25em;
+text-align:center;
+background-position: center center;
+background-repeat: no-repeat;
+background-size: cover;
+/**filter: blur(0.7px); **/
+}
+
+
+.bg-text{
+
+  font-size: 60px;
+  top: 35%;
+  z-index: 5;
+  width: 45%;
+ /** padding: 40px 0;**/
+  text-align: center;
+  vertical-align: 100em;
+  font-weight: bold;
+  /* border-top-left-radius: 70px; */
+
+}
+h1{
+  text-align:center;
+  padding-left:6em;
+}
+.navbar-brand
+{
+  font-family: 'Ubuntu', sans-serif;
+/* font-weight: bold; */
+  font-size: 2rem;
+  color: white;
+  font-weight: 800;
+}
+
+.navbar
+{
+padding-bottom: 4.5rem;
+padding-left: 0;
+padding-right: 0;
+padding-top: 0;
+filter: blur(0);
+}
+
+.nav-item
+{
+padding-left: 18px;
+padding-right: 18px;
+font-size:1.6rem;
+color:crimson;
+}
+.nav-link
+{
+font-size: 1.5rem;
+font-weight: 600;
+color: white;
+
+}
+
+.bg-img .navbar a:hover{
+  color: crimson;
+}
+
+span{
+
+  color: crimson;
+}
+
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height:15em;
+  margin:3em;
+  
+}
+.card-body{
+  background-color:rgb(247, 224, 229);
+}
+.card-title{
+text-align: center;
+}
+
+.col-sm-6{
+
+width: 50%;
+padding: 20px;
+
+}
+
+.end{
+
+background-color: crimson;
+color: white;
+}
+
+.icons{
+
+padding: 3px;
+padding-left: 25px;
+}
+
+.icon-link{
+color: white;
+padding-right: 10px;
+
+}
+.icons-img{
+  width:2.5em;
+  height:2.5em;
+  margin:1px;
+}
+
+.find{
+color: white;
+padding: 20px;
+}
+
+.mail{
+padding: 20px;
+padding-left: 40px;
+}
+
+.social{
+padding: 20px;
+}
+
+.icons a:hover{
+color: grey;
+}
