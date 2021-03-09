@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import * as faceapi from "face-api.js";
 import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
+import firebase from "firebase";
+import { useHistory } from "react-router-dom";
+import * as routes from "../constants/routes";
 
 /**
  * use useState to store 5 frames detected from camera, after that
@@ -16,6 +19,7 @@ import { useStateValue } from "../StateProvider";
 
 function Detect() {
   const [{ uid, features, name }, dispatch] = useStateValue();
+  const history = useHistory();
 
   useEffect(() => {
     // database queries
@@ -74,87 +78,195 @@ function Detect() {
   }, [dispatch, features, uid]);
 
   useEffect(() => {
-    if (features !== null) {
-      var video = document.querySelector("#video");
+    var video = document.querySelector("#video");
 
-      function stopStream() {
-        if (video.srcObject) {
-          const stream = video.srcObject;
-          const tracks = stream.getTracks();
+    function stopStream() {
+      if (video.srcObject) {
+        const stream = video.srcObject;
+        const tracks = stream.getTracks();
 
-          tracks.forEach(function (track) {
-            track.stop();
-          });
+        tracks.forEach(function (track) {
+          track.stop();
+        });
 
-          video.srcObject = null;
-        } else {
-          console.log("Video doesn't have any src");
-        }
+        video.srcObject = null;
+      } else {
+        console.log("Video doesn't have any src");
       }
-
-      video.addEventListener("playing", async () => {
-        console.log("Playing");
-
-        const parsedUserFeatures = JSON.parse(features);
-
-        const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
-          parsedUserFeatures
-        );
-
-        const faceMatcher = new faceapi.FaceMatcher(
-          labeledFaceDescriptors,
-          0.6
-        );
-
-        const displaySize = {
-          width: video.videoWidth,
-          height: video.videoHeight,
-        };
-
-        const recogRes = [];
-
-        async function recogniseFace() {
-          const detections = await faceapi
-            .detectAllFaces(video)
-            .withFaceLandmarks()
-            .withFaceDescriptors();
-
-          const resizedDetections = faceapi.resizeResults(
-            detections,
-            displaySize
-          );
-
-          const results = resizedDetections.map((d) =>
-            faceMatcher.findBestMatch(d.descriptor)
-          );
-
-          results.forEach((result, i) => {
-            if (result.label === "user name") recogRes.push(true);
-            else recogRes.push(false);
-          });
-        }
-
-        const interval = setInterval(() => {
-          if (recogRes.length === 5) {
-            stopStream();
-            let cnt = 0;
-
-            recogRes.forEach((res) => {
-              if (res) cnt++;
-            });
-
-            if (cnt >= recogRes.length / 2 + 1) console.log("Result passed");
-            clearInterval(interval);
-          }
-
-          console.log(recogRes.length);
-          recogniseFace();
-        }, 100);
-      });
     }
 
-    return () => {};
-  }, [features, name]);
+    const onVideoStarted = async () => {
+      console.log("Playing");
+
+      const parsedUserFeatures = JSON.parse(features);
+
+      const labeledFaceDescriptors = await faceapi.LabeledFaceDescriptors.fromJSON(
+        parsedUserFeatures
+      );
+
+      const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+
+      const displaySize = {
+        width: video.videoWidth,
+        height: video.videoHeight,
+      };
+
+      const recogRes = [];
+
+      async function recogniseFace() {
+        const detections = await faceapi
+          .detectAllFaces(video)
+          .withFaceLandmarks()
+          .withFaceDescriptors();
+
+        const resizedDetections = faceapi.resizeResults(
+          detections,
+          displaySize
+        );
+
+        const results = resizedDetections.map((d) =>
+          faceMatcher.findBestMatch(d.descriptor)
+        );
+
+        results.forEach((result, i) => {
+          if (result.label === name) recogRes.push(true);
+          else recogRes.push(false);
+        });
+      }
+
+      const interval = setInterval(async () => {
+        if (recogRes.length === 5) {
+          stopStream();
+          let cnt = 0;
+
+          recogRes.forEach((res) => {
+            if (res) cnt++;
+          });
+
+          if (cnt >= recogRes.length / 2 + 1) {
+            console.log("Result passed");
+
+            try {
+              const firebaseDate = firebase.firestore.Timestamp.now(
+                new Date()
+              ).toDate();
+
+              const uniQueEntry =
+                firebaseDate.getDate().toString() +
+                "-" +
+                firebaseDate.getMonth().toString() +
+                "-" +
+                firebaseDate.getFullYear().toString();
+
+              // check if the user is doing 1st entry at 9-12
+              const currentDate = firebaseDate.getHours();
+
+              const time =
+                firebaseDate.getHours().toString() +
+                ":" +
+                firebaseDate.getMinutes().toString() +
+                ":" +
+                firebaseDate.getSeconds().toString();
+
+              // check if the user is doing 1st entry at 9-12
+              if (currentDate >= 9 && currentDate <= 12) {
+                //  first time fucking...
+                const data = await db
+                  .collection("users")
+                  .doc(uid)
+                  .collection("attendance")
+                  .doc(uniQueEntry)
+                  .get()
+                  .then(() => {
+                    console.log("Data fetched successfully!");
+                  })
+                  .catch((err) => console.log(err));
+
+                if (!data.exists) {
+                  await db
+                    .collection("users")
+                    .doc(uid)
+                    .collection("attendance")
+                    .doc(uniQueEntry)
+                    .set({
+                      morning: time,
+                    })
+                    .then(() => {
+                      console.log("Morning timestamp saved successfully!!");
+                    })
+                    .catch((err) => console.log(err));
+                }
+              }
+
+              // check if the user is doing 1st entry at 2-5 ie 14-17
+              if (currentDate >= 14 && currentDate <= 17) {
+                // second time...
+                const data = await db
+                  .collection("users")
+                  .doc(uid)
+                  .collection("attendance")
+                  .doc(uniQueEntry)
+                  .get()
+                  .then(() => {
+                    console.log("Data fetched successfully!");
+                  })
+                  .catch((err) => console.log(err));
+
+                if (!data.exists) {
+                  await db
+                    .collection("users")
+                    .doc(uid)
+                    .collection("attendance")
+                    .doc(uniQueEntry)
+                    .set({
+                      evening: time,
+                    })
+                    .then(() => {
+                      console.log("Evening timestamp saved successfully!!");
+                    })
+                    .catch((err) => console.log(err));
+                } else if (data.exists && data.data().evening === null) {
+                  await db
+                    .collection("users")
+                    .doc(uid)
+                    .collection("attendance")
+                    .doc(uniQueEntry)
+                    .set({
+                      evening: time,
+                    })
+                    .then(() => {
+                      console.log("Evening timestamp saved successfully!!");
+                    })
+                    .catch((err) => console.log(err));
+                }
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          }
+
+          clearInterval(interval);
+        }
+        if (recogRes.length > 5) {
+          stopStream();
+          clearInterval(interval);
+        }
+
+        console.log(recogRes.length);
+        recogniseFace();
+      }, 100);
+    };
+
+    if (features !== null) {
+      video.addEventListener("playing", onVideoStarted);
+    }
+
+    return () => {
+      video.removeEventListener("playing", onVideoStarted);
+      stopStream();
+      history.push(routes.HOME);
+    };
+  }, [features, name, history, uid]);
 
   return (
     <div>

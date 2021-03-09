@@ -24,8 +24,6 @@ function Signup() {
               collegeId: InsId,
             });
           }
-
-          console.log("fuck off from here");
         })
         .catch((err) => console.log(err));
     }

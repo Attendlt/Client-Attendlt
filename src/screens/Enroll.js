@@ -53,7 +53,7 @@ function Enroll() {
 
       const trainImages = async () => {
         const labeledFaceDescriptors = await new faceapi.LabeledFaceDescriptors(
-          "user name",
+          name,
           descriptions
         );
 
@@ -94,6 +94,10 @@ function Enroll() {
           } catch (e) {
             console.log(e);
           }
+        }
+        if (descriptions.length > 25) {
+          stopStream();
+          clearInterval(interval);
         }
 
         try {

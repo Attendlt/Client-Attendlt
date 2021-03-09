@@ -13,7 +13,7 @@ function Signin() {
         .signInWithEmailAndPassword(email, password)
         .then(async (authUser) => {
           if (authUser) {
-            console.log("fuck off from here");
+            console.log("Login Successful!!");
           }
         })
         .catch((err) => console.log(err));

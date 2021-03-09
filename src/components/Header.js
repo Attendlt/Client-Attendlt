@@ -31,12 +31,22 @@ function Head() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              {uid && finishedSetup && (
-                <Nav.Link>
-                  <Link to={routes.DETECT} className="head_navlink">
-                    Take Attendance
-                  </Link>
-                </Nav.Link>
+              {uid ? (
+                finishedSetup ? (
+                  <Nav.Link>
+                    <Link to={routes.DETECT} className="head_navlink">
+                      Take Attendance
+                    </Link>
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link>
+                    <Link to={routes.ENROLL} className="head_navlink">
+                      Enroll
+                    </Link>
+                  </Nav.Link>
+                )
+              ) : (
+                <></>
               )}
 
               <Nav.Link>
