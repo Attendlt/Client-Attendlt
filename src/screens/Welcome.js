@@ -34,6 +34,8 @@ function Welcome() {
             accurate and secure attendance system.
           </h6>
         </div>
+        <br/>
+        <br/>
         <Footbt/>
 
         <div id="features" className="rows">
@@ -65,7 +67,7 @@ function Welcome() {
         </div>
       </div>
       <div className="video">
-        <video width={750} height={400} controls>
+        <video width={350} height={300} controls>
           <source
             src="https://wordpress-375262-1702015.cloudwaysapps.com/wp-content/uploads/2021/01/truein-attendance-demo-1.mp4"
             type="video/mp4"

@@ -7,6 +7,6 @@
   color: rgba(0, 0, 0, 0.8);
 }
 .btnsu :hover {
-    width:102%;
     color:red;
+    background-color: rgb(238, 232, 232);
 }
