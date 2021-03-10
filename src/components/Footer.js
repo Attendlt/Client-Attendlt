@@ -36,6 +36,7 @@ const FooterPage = () => {
                 instagram, email and GitHub. We strive to provide proactive
                 support before even you reach out to us!
               </h6>
+              <h3>Email us at: attendit4@gmail.com</h3>
             </MDBCol>
 
             <MDBCol md="4">
