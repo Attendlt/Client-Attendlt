@@ -1,6 +1,6 @@
 import React from "react";
 import "./Welcome.css";
-
+import Footbt from '../components/Footbt';
 let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 
 function Welcome() {
@@ -23,7 +23,7 @@ function Welcome() {
       <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Ubuntu&display=swap"
         rel="stylesheet"
-      />
+        />
       <div className="poster">
         <div className="about">
           <h2>Touchless Face recognition based Employee Attendance</h2>
@@ -34,6 +34,7 @@ function Welcome() {
             accurate and secure attendance system.
           </h6>
         </div>
+        <Footbt/>
 
         <div id="features" className="rows">
           <div className="cols">

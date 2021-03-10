@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 function Footbtn() {
   return (<>
     <div className="footer">
-        <Button variant ="text" style={{color:'white',width:'100%',height:'100%'}}>Schedule Demo
+        <Button variant ="primary" style={{background:'teal',color:'white',width:'40%',height:'200%',position:'relative'}}>Register Yourself
         </Button>
     </div>
   </>);
