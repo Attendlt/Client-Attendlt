@@ -79,6 +79,7 @@ function Detect() {
 
   useEffect(() => {
     var video = document.querySelector("#video");
+    var interval;
 
     function stopStream() {
       if (video.srcObject) {
@@ -134,7 +135,7 @@ function Detect() {
         });
       }
 
-      const interval = setInterval(async () => {
+      interval = setInterval(async () => {
         if (recogRes.length === 5) {
           stopStream();
           let cnt = 0;
@@ -146,8 +147,8 @@ function Detect() {
           if (cnt >= recogRes.length / 2 + 1) {
             console.log("Result passed");
 
-            try {
-              const firebaseDate = firebase.firestore.Timestamp.now(
+            const saveAttendance = async () => {
+              const firebaseDate = await firebase.firestore.Timestamp.now(
                 new Date()
               ).toDate();
 
@@ -176,13 +177,9 @@ function Detect() {
                   .doc(uid)
                   .collection("attendance")
                   .doc(uniQueEntry)
-                  .get()
-                  .then(() => {
-                    console.log("Data fetched successfully!");
-                  })
-                  .catch((err) => console.log(err));
+                  .get();
 
-                if (!data.exists) {
+                if (!data?.exists) {
                   await db
                     .collection("users")
                     .doc(uid)
@@ -206,13 +203,9 @@ function Detect() {
                   .doc(uid)
                   .collection("attendance")
                   .doc(uniQueEntry)
-                  .get()
-                  .then(() => {
-                    console.log("Data fetched successfully!");
-                  })
-                  .catch((err) => console.log(err));
+                  .get();
 
-                if (!data.exists) {
+                if (!data?.exists) {
                   await db
                     .collection("users")
                     .doc(uid)
@@ -225,13 +218,13 @@ function Detect() {
                       console.log("Evening timestamp saved successfully!!");
                     })
                     .catch((err) => console.log(err));
-                } else if (data.exists && data.data().evening === null) {
+                } else if (data?.exists && data.data().evening === null) {
                   await db
                     .collection("users")
                     .doc(uid)
                     .collection("attendance")
                     .doc(uniQueEntry)
-                    .set({
+                    .update({
                       evening: time,
                     })
                     .then(() => {
@@ -240,12 +233,15 @@ function Detect() {
                     .catch((err) => console.log(err));
                 }
               }
+            };
+
+            try {
+              saveAttendance();
             } catch (err) {
               console.log(err);
             }
           }
-
-          clearInterval(interval);
+          history.push(routes.HOME);
         }
         if (recogRes.length > 5) {
           stopStream();
@@ -263,8 +259,8 @@ function Detect() {
 
     return () => {
       video.removeEventListener("playing", onVideoStarted);
+      clearInterval(interval);
       stopStream();
-      history.push(routes.HOME);
     };
   }, [features, name, history, uid]);
 
