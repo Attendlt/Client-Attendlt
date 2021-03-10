@@ -70,7 +70,7 @@ function Head() {
               <>
                 <Link to={routes.SIGNUP}>
                   <Button variant="contained" color="secondary">
-                    Register \u{1F468}\u{200D}\u{1F4BC}
+                    Register 
                   </Button>
                 </Link>
                 /
