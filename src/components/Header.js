@@ -57,7 +57,7 @@ function Head() {
 
               <Nav.Link>
                 <Link to={routes.ABOUT} className="head_navlink">
-                  About Us
+                  Testimonials
                 </Link>
               </Nav.Link>
             </Nav>
