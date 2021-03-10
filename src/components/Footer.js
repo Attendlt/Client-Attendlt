@@ -7,6 +7,7 @@ import * as routes from "../constants/routes";
 import { Link } from "react-router-dom";
 
 let tagline = <span style={{ color: "rgb(73, 240, 240)" }}>Attendlt</span>;
+let emailline=<span style={{color:"rgb(73, 240, 240)"}}>attendit4@gmail.com</span>
 const FooterPage = () => {
   const [{ uid }] = useStateValue();
 
@@ -36,6 +37,8 @@ const FooterPage = () => {
                 instagram, email and GitHub. We strive to provide proactive
                 support before even you reach out to us!
               </h6>
+              <h5>Email us at: {emailline}
+              </h5>
             </MDBCol>
 
             <MDBCol md="4">
