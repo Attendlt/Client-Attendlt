@@ -5,11 +5,11 @@ let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 function T() {
     return <div>
 
-        <div className="poster-about" style={{ textAlign: 'center', padding: '4%' }}>
             <div className="about">
                 <h2>Here Are Few Of The Testimonials For {tagline}:Attendance System</h2> 
         <h6>A testimonial is a third party statement that comments on how good someone or something is. And for us,A good testimonial from our great User is what matters!
-          </h6></div></div>
+          </h6></div>
+            <div className="poster-about"></div>
         <div id="test" className="container">
             <div className="row">
                 <div className="col-md-4">
