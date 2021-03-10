@@ -7,7 +7,9 @@ import * as routes from "../constants/routes";
 import { Link } from "react-router-dom";
 
 let tagline = <span style={{ color: "rgb(73, 240, 240)" }}>Attendlt</span>;
-let emailline=<span style={{color:"rgb(73, 240, 240)"}}>attendit4@gmail.com</span>
+let emailline = (
+  <span style={{ color: "rgb(73, 240, 240)" }}>attendit4@gmail.com</span>
+);
 const FooterPage = () => {
   const [{ uid }] = useStateValue();
 
@@ -20,30 +22,32 @@ const FooterPage = () => {
               <h5 className="title" style={{ color: "rgb(73, 240, 240)" }}>
                 Team Members: IIIT Pune
               </h5>
-              
-                <ul>
-                  <li className="ls=ist-unstyled">Swarnim Pratap Singh</li>
-                  <li className="ls=ist-unstyled">Vimal Gupta</li>
-                  <li className="ls=ist-unstyled">Sakshi Ramsinghani</li>
-                  <li className="ls=ist-unstyled">Aditi Dwivedi</li>
-                </ul>
-              </MDBCol>
+
+              <ul>
+                <li className="ls=ist-unstyled">Swarnim Pratap Singh</li>
+                <li className="ls=ist-unstyled">Vimal Gupta</li>
+                <li className="ls=ist-unstyled">Sakshi Ramsinghani</li>
+                <li className="ls=ist-unstyled">Aditi Dwivedi</li>
+              </ul>
+            </MDBCol>
 
             <MDBCol md="4">
-              <h5 className="title">{tagline}:Virtualising the future</h5>
+              <h5 className="title">{tagline} : Virtualising the future</h5>
               <h6 style={{ color: "grey" }}>
                 {" "}
                 Our support team is available via various channels like
                 instagram, email and GitHub. We strive to provide proactive
                 support before even you reach out to us!
               </h6>
-              <h5>Email us at: <a href={"mailto:attendit4@gmail.com"}> {emailline}</a>
+              <h5>
+                Email us at:{" "}
+                <a href={"mailto:attendit4@gmail.com"}> {emailline}</a>
               </h5>
             </MDBCol>
 
             <MDBCol md="4">
               <h5 className="title" style={{ color: "rgb(73, 240, 240)" }}>
-                SocialMedia Platform Details
+                Social Media Platform Details
               </h5>
               <ul>
                 <li
