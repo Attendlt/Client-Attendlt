@@ -70,13 +70,13 @@ function Head() {
               <>
                 <Link to={routes.SIGNUP}>
                   <Button variant="contained" color="secondary">
-                    Register👨‍💼
+                    Register \u{1F468}\u{200D}\u{1F4BC}
                   </Button>
                 </Link>
                 /
                 <Link to={routes.SIGNIN}>
                   <Button variant="contained" color="secondary">
-                    Login👨‍💼
+                    Login
                   </Button>
                 </Link>
               </>
