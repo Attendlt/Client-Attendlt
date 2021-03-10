@@ -80,7 +80,8 @@ function Welcome() {
                 {" "}
                 <img
                   className="img-fluid"
-                  src="https://www.iiitp.ac.in/sites/default/files/styles/people_photo/public/2019-06/bhupendra.jpg?itok=z383VBvs" alt="bhupendra sir"
+                  src="https://www.iiitp.ac.in/sites/default/files/styles/people_photo/public/2019-06/bhupendra.jpg?itok=z383VBvs"
+                  alt="bhupendra sir"
                 />{" "}
               </div>
               <div className="card-text">
@@ -110,7 +111,8 @@ function Welcome() {
                 {" "}
                 <img
                   className="img-fluid"
-                  src="https://www.iiitp.ac.in/sites/default/files/styles/thumbnail/public/2020-09/preview-full-Rohan%20Lekhwani_0.jpg?itok=3XIoEBG9" alt="rohan sir"
+                  src="https://www.iiitp.ac.in/sites/default/files/styles/thumbnail/public/2020-09/preview-full-Rohan%20Lekhwani_0.jpg?itok=3XIoEBG9"
+                  alt="rohan sir"
                 />{" "}
               </div>
               <div className="card-text">
@@ -138,7 +140,7 @@ function Welcome() {
             <div className="card d-flex mx-auto ">
               <div className="card-image">
                 {" "}
-                <img className="img-fluid" src="sy.png" alt="new sir"/>{" "}
+                <img className="img-fluid" src="sy.png" alt="new sir" />{" "}
               </div>
               <div className="card-text">
                 <div className="card-title">Lorem Ipsum!</div> Lorem ipsum dolor
@@ -163,8 +165,7 @@ function Welcome() {
           </div>
         </div>
       </div>
-     
-      </div>
+    </div>
   );
 }
 
