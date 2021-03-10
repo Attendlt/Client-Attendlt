@@ -69,15 +69,18 @@ function Head() {
             ) : (
               <>
                 <Link to={routes.SIGNUP}>
-                  <Button variant="contained" color="secondary">
+                    <span className="btnsu">
+                  <Button variant="contained" color="secondary" className="Btnsu">
                     Register 
                   </Button>
+                  </span>
                 </Link>
                 /
                 <Link to={routes.SIGNIN}>
-                  <Button variant="contained" color="secondary">
+                    <span className="btnsu">
+                  <Button variant="contained" color="secondary" >
                     Login
-                  </Button>
+                  </Button></span>
                 </Link>
               </>
             )}
