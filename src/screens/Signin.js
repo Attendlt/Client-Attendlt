@@ -21,7 +21,7 @@ function Signin() {
   };
 
   return (
-    <div>
+    <div className="poster-signin">
       <div className="container mt-4" style={{ width: "70%", padding: "10%" }}>
         <h2
           style={{ color: "grey", textAlign: "center", textDecoration: "bold" }}

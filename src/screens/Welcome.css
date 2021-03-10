@@ -1,37 +1,28 @@
-.navbar-brand
-{
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 3em;
-    color:black;
-    font-weight: 400;
-    font-weight:bolder;
-   
-}
 
 .poster{
     background-image:url("https://image.freepik.com/free-photo/stationery-keyboard-white-table-with-green-leaves-coffee-cup_23-2148128452.jpg");
     background-repeat: no-repeat;
     background-size:cover;
     
-  }
-.nav-item
-{
-    font-size: 1.5em;
-    padding-left: 20px;
-   
 }
 
-.nav-link{
-    color: #CC0033;
+.poster-signup{
+    background-image:url("https://images.unsplash.com/photo-1542435503-956c469947f6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjV8fHJlZ2lzdGVyJTIwd2Vic2l0ZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+    background-repeat: no-repeat;
+    background-size:cover;
+    
+}
+.poster-signin{
+    background-image:url("https://images.unsplash.com/photo-1559056961-1f4dbbf9d36a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZ2lufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+    background-repeat: no-repeat;
+    background-size:cover;
 
 }
-
-
 .container {
     max-width: 950px;
     padding-bottom: 50px;
     padding-top: 30px;
-    background-color: #ebbdc1;
+    /* background-color: #ebbdc1; */
 }
 
 .card {
@@ -112,7 +103,7 @@ img.img-fluid {
 {
     height: 310px;
     padding-top: 50px;
-    background-color:crimson;
+    background-color:rgb(220, 20, 20);
     color:white;
 }
 
