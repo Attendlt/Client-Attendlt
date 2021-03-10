@@ -37,7 +37,7 @@ const FooterPage = () => {
                 instagram, email and GitHub. We strive to provide proactive
                 support before even you reach out to us!
               </h6>
-              <h5>Email us at: {emailline}
+              <h5>Email us at: <a href={"mailto:attendit4@gmail.com"}> {emailline}</a>
               </h5>
             </MDBCol>
 
