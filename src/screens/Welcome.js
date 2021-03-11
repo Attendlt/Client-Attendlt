@@ -1,7 +1,9 @@
 import React from "react";
 import "./Welcome.css";
 import Footbt from '../components/Footbt';
-import Testimonial from './About';
+import { Button } from '@material-ui/core';
+import * as routes from "../constants/routes";
+import {Link} from 'react-router-dom';
 let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 
 function Welcome() {
@@ -76,7 +78,16 @@ function Welcome() {
           Your browser does not support the video tag.
         </video>
       </div>
-      <Testimonial/>
+      {/* testimonial button section */}
+      <div className="poster-abt">
+
+       <div className="about">
+                <h2>Here Are Few Of The Testimonials For {tagline}:Attendance System</h2> </div>
+          <div className="footer">
+        <Link to ={routes.ABOUT}><Button variant ="primary" style={{background:'teal',color:'white',width:'40%',height:'2000%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Testimonials
+        </Button></Link>
+    </div>
+      </div>
     </div>
   );
 }
