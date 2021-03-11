@@ -1,14 +1,17 @@
+import pic from './pic.jpg';
 import React from "react";
 import "./Welcome.css";
 let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 
 function T() {
     return <div>
+<div className="poster-abt">
 
             <div className="about">
                 <h2>Here Are Few Of The Testimonials For {tagline}:Attendance System</h2> 
         <h6>A testimonial is a third party statement that comments on how good someone or something is. And for us,A good testimonial from our great User is what matters!
           </h6></div>
+</div>
             <div className="poster-about"></div>
         <div id="test" className="container">
             <div className="row">
@@ -78,7 +81,7 @@ function T() {
                     <div className="card d-flex mx-auto ">
                         <div className="card-image">
                             {" "}
-                            <img className="img-fluid" src="sy.png" alt="new sir" />{" "}
+                            <img className="img-fluid" src={pic} alt="new sir" />{" "}
                         </div>
                         <div className="card-text">
                             <div className="card-title">Lorem Ipsum!</div> Lorem ipsum dolor

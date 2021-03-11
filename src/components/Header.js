@@ -50,8 +50,8 @@ function Head() {
               )}
 
               <Nav.Link>
-                <Link to={routes.FEATURE} className="head_navlink">
-                  Features
+                <Link to={routes.ADMIN} className="head_navlink">
+                  Admin-Panel
                 </Link>
               </Nav.Link>
 
