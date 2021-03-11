@@ -82,16 +82,14 @@ function T() {
                             <img className="img-fluid" src={pic} alt="Shreyash Kadu" />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">{r}</div> Lorem ipsum dolor
-                sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
-                pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
-                tincidunt tempus Duis leo. Donec sodales sagittis magna
+                            <div className="card-title">{r}</div> Its new, fascinating and fuss-free to give attendance using this app. Its perfect to prevent proxy 
+                            attendance, a concern for teachers and authorities.
+
               </div>
                         <div className="footer">
                             {" "}
                             <span id="name">
-                                Shreyash Kadu
+                                Shreyas Kadu
                   <br />
                             </span>{" "}
                             <span id="position">
