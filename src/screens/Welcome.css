@@ -126,20 +126,10 @@ img.img-fluid {
     padding: 10px;
 }
 
-.social{
-    padding: 10px;
-}
 
 h2{
     text-align: center;
     padding: 20px;
-}
-
-h6{
-
-    line-height: 2rem;
-    text-align: center;
-    font-size: 20px;
 }
 
 .cols {
@@ -164,7 +154,7 @@ h6{
     display: table;
     clear: both;
   }
-  
+
   /* Style the counter cards */
   .cards {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
@@ -197,4 +187,12 @@ h6{
     width:2.5em;
     height:2.5em;
     margin:1px;
+}
+.form{
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" 
+      effect */
+      padding: 16px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
 }

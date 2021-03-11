@@ -23,6 +23,7 @@ function Signin() {
   return (
     <div className="poster-signin">
       <div className="container mt-4" style={{ width: "70%", padding: "10%" }}>
+          <div className="form">
         <h2
           style={{ color: "grey", textAlign: "center", textDecoration: "bold" }}
         >
@@ -37,7 +38,7 @@ function Signin() {
         >
           To Login In Your Account, Fill the following details!
         </h3>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="form">
           <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -59,11 +60,12 @@ function Signin() {
           </Form.Group>
           <Button
             type="submit"
-            style={{ width: "45%", marginLeft: "25%", background: "#ff3300" }}
+            style={{ width: "45%", background: "#ff3300" }}
           >
-            Submit
+            Login
           </Button>
         </Form>
+      </div>
       </div>
     </div>
   );

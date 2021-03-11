@@ -34,6 +34,7 @@ function Signup() {
     <>
     <div className="poster-signup">
       <div className="container mt-4" style={{ width: "70%", padding: "10%" }}>
+        <div className="form">
         <h2
           style={{ color: "grey", textAlign: "center", textDecoration: "bold" }}
         >
@@ -48,7 +49,7 @@ function Signup() {
         >
           You need to fill the following details to register!
         </h3>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="form">
           <Form.Group>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -90,11 +91,12 @@ function Signup() {
           </Form.Group>
           <Button
             type="submit"
-            style={{ width: "45%", marginLeft: "28%", background: "#ff3300" }}
+            style={{ width: "45%", background: "#ff3300" }}
           >
-            Submit
+            Register
           </Button>
         </Form>
+      </div>
       </div>
       </div>
     </>
