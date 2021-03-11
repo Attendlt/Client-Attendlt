@@ -7,11 +7,11 @@
   color: rgba(0, 0, 0, 0.8);
 }
 .btnsu :hover {
-    color:red;
-    background-color: rgb(238, 232, 232);
+  color: red;
+  background-color: rgb(238, 232, 232);
 }
-.navhead 
+/* .navhead 
 {
     position: fixed;    top:0;
     width:100%;
-}
+} */

@@ -50,12 +50,6 @@ function Head() {
               )}
 
               <Nav.Link>
-                <Link to={routes.ADMIN} className="head_navlink">
-                  Admin-Panel
-                </Link>
-              </Nav.Link>
-
-              <Nav.Link>
                 <Link to={routes.ABOUT} className="head_navlink">
                   Testimonials
                 </Link>
@@ -69,18 +63,23 @@ function Head() {
             ) : (
               <>
                 <Link to={routes.SIGNUP}>
-                    <span className="btnsu">
-                  <Button variant="contained" color="secondary" className="Btnsu">
-                    Register 
-                  </Button>
+                  <span className="btnsu">
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className="Btnsu"
+                    >
+                      Register
+                    </Button>
                   </span>
                 </Link>
                 /
                 <Link to={routes.SIGNIN}>
-                    <span className="btnsu">
-                  <Button variant="contained" color="secondary" >
-                    Login
-                  </Button></span>
+                  <span className="btnsu">
+                    <Button variant="contained" color="secondary">
+                      Login
+                    </Button>
+                  </span>
                 </Link>
               </>
             )}
