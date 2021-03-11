@@ -2,7 +2,7 @@ import pic from './pic.jpg';
 import React from "react";
 import "./Welcome.css";
 let tagline = <span style={{ color: "red" }}>Attendlt</span>;
-
+let r=<span style={{ color: "red" }}>Reviews!</span>;
 function T() {
     return <div>
 <div className="poster-abt">
@@ -26,7 +26,7 @@ function T() {
                             />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">Lorem Ipsum!</div> Lorem ipsum dolor
+                            <div className="card-title">{r}</div> Lorem ipsum dolor
                 sit amet, consectetuer adipiscing elit. Aenean commodo ligula
                 eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
                 pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
@@ -57,7 +57,7 @@ function T() {
                             />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">Lorem Ipsum!</div> Lorem ipsum dolor
+                            <div className="card-title">{r}</div> Lorem ipsum dolor
                 sit amet, consectetuer adipiscing elit. Aenean commodo ligula
                 eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
                 pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
@@ -81,10 +81,10 @@ function T() {
                     <div className="card d-flex mx-auto ">
                         <div className="card-image">
                             {" "}
-                            <img className="img-fluid" src={pic} alt="new sir" />{" "}
+                            <img className="img-fluid" src={pic} alt="Shreyash Kadu" />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">Lorem Ipsum!</div> Lorem ipsum dolor
+                            <div className="card-title">{r}</div> Lorem ipsum dolor
                 sit amet, consectetuer adipiscing elit. Aenean commodo ligula
                 eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
                 pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
@@ -93,11 +93,11 @@ function T() {
                         <div className="footer">
                             {" "}
                             <span id="name">
-                                XYZ
+                                Shreyash Kadu
                   <br />
                             </span>{" "}
                             <span id="position">
-                                Second Year
+                                Second Year Student,iiitp
                   <br />
                   IIIT Pune
                 </span>{" "}

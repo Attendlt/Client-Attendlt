@@ -16,7 +16,7 @@ function Head() {
   };
 
   return (
-    <div>
+    <div className="navhead">
       <div className="navb">
         <Navbar bg="light" variant="light" expand="lg">
           <Navbar.Brand>

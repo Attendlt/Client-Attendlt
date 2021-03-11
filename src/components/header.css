@@ -10,3 +10,7 @@
     color:red;
     background-color: rgb(238, 232, 232);
 }
+.navhead {
+    position: fixed;    top:0;
+    width:100%;
+}
