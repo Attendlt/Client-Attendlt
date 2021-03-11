@@ -55,11 +55,9 @@ function T() {
                             />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">{r}</div> Lorem ipsum dolor
-                sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
-                pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
-                tincidunt tempus Duis leo. Donec sodales sagittis magna
+                            <div className="card-title">{r}</div> Its scalable, secure and optimised for any
+                            device. Use of Firebase, made storing and retrieval of dynamic content easy and use of RegNet,
+                             the self-regulated network for image classification has made its speed commendably fast.
               </div>
                         <div className="footer">
                             {" "}
