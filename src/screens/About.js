@@ -5,6 +5,7 @@ let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 let r=<span style={{ color: "red" }}>Reviews!</span>;
 function T() {
     return <div>
+<div className="abtform">
 <div className="poster-abt">
 
             <div className="about">
@@ -105,6 +106,7 @@ function T() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>;
 }
