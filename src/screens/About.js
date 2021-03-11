@@ -27,11 +27,8 @@ function T() {
                             />{" "}
                         </div>
                         <div className="card-text">
-                            <div className="card-title">{r}</div> Lorem ipsum dolor
-                sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                eget dolor. Aenean massa. Nam quam nunc, blandit vel, luctus
-                pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
-                tincidunt tempus Duis leo. Donec sodales sagittis magna
+                            <div className="card-title">{r}</div> This application is a safe and reliable way of taking attendance. It has a user-friendly interface, 
+                                 it's optimised for mobile and suitable for current times and future alike.
               </div>
                         <div className="footer">
                             {" "}
