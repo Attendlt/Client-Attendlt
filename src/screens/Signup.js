@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
 import './Welcome.css';
-
+import S from "./emailauth";
 function Signup() {
   const [name, setName] = useState(null);
   const [InsId, setInsId] = useState(null);
@@ -32,6 +32,7 @@ function Signup() {
 
   return (
     <>
+    <S/>
     <div className="poster-signup">
       <div className="container mt-4" style={{ width: "70%", padding: "10%" }}>
         <div className="form">
