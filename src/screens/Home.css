@@ -34,41 +34,7 @@ h1 {
   text-align: center;
   padding-left: 6em;
 }
-.navbar-brand {
-  font-family: "Ubuntu", sans-serif;
-  /* font-weight: bold; */
-  font-size: 2rem;
-  color: white;
-  font-weight: 800;
-}
 
-.navbar {
-  padding-bottom: 4.5rem;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  filter: blur(0);
-}
-
-.nav-item {
-  padding-left: 18px;
-  padding-right: 18px;
-  font-size: 1.6rem;
-  color: crimson;
-}
-.nav-link {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-}
-
-.bg-img .navbar a:hover {
-  color: crimson;
-}
-
-span {
-  color: crimson;
-}
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

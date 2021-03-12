@@ -1,5 +1,6 @@
 import { useStateValue } from "../StateProvider";
 import React from "react";
+import Homie from './Home1';
 // import { Link } from "react-router-dom";
 // import * as routes from "../constants/routes";
 
@@ -13,14 +14,15 @@ function Home() {
 
   return (
     <div>
-      This is home page
+      <Homie/>        
       <br />
-      {finishedSetup ? (
+      {finishedSetup ? (<>
         "welcome to attendlt"
+        </>
       ) : (
         <>
           <br />
-          Please enroll yourself to continue
+          Bhai enroll konkrega 
           <br />
         </>
       )}
