@@ -10,7 +10,7 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name /*&& email*/ && password && InsId) {
+    if (name && email && password && InsId) {
       await auth
         .createUserWithEmailAndPassword(email, password)
         .then(async (authUser) => {
@@ -69,7 +69,7 @@ function Signup() {
             />
           </Form.Group>
 
-          {/* <Form.Group>
+          <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -77,7 +77,7 @@ function Signup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group>
             <Form.Label>Password</Form.Label>
