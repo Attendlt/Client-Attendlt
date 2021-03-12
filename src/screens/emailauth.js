@@ -5,21 +5,18 @@ import './Welcome.css';
 
 function EmailAuth() {
   const [email, setEmail] = useState(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name && email && password && InsId) {
+    if (email) {
       await auth
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email)
         .then(async (authUser) => {
           if (authUser) {
             const uid = authUser?.user?.uid;
 
             db.collection("users").doc(uid).set({
-              name: name,
               finishedSetup: false,
               features: null, // means get the institute id and face features of the student
-              collegeId: InsId,
             });
           }
         })
