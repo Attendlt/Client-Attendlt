@@ -1,5 +1,6 @@
 *{
   box-sizing: border-box;
+  /* color:whitesmoke; */
 }
 body,html{
 
@@ -146,10 +147,9 @@ color: grey;
   padding:2em;
   box-sizing:border-box;
   text-align:center;
- 
 }
-.button{
-    background-color: crimson; /* Green */
+/* .button{
+    background-color: crimson; Green
   border-radius:10px;
   color: white;
   padding: 15px 32px;
@@ -159,4 +159,4 @@ color: grey;
   display: inline-block;
   font-size: 3em;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-}
+} */
