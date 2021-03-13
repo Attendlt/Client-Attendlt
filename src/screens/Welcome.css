@@ -1,209 +1,196 @@
-
-.poster{
-    background-image:url("https://image.freepik.com/free-photo/stationery-keyboard-white-table-with-green-leaves-coffee-cup_23-2148128452.jpg");
-
-    
+.poster {
+  background-image: url("https://image.freepik.com/free-photo/stationery-keyboard-white-table-with-green-leaves-coffee-cup_23-2148128452.jpg");
 }
-*{    background-repeat: no-repeat;
-    background-size:cover;}
-
-.poster-abt{
-    background-image:url("https://img.freepik.com/free-vector/white-technology-background_23-2148403783.jpg?size=626&ext=jpg");
-}
-.poster-about{
-    background-image:url("https://img.freepik.com/free-vector/customer-survey-concept-illustration_114360-558.jpg?size=626&ext=jpg");
-    padding:28%;   
+* {
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.poster-signup{
-    background-image:url("https://images.unsplash.com/photo-1542435503-956c469947f6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjV8fHJlZ2lzdGVyJTIwd2Vic2l0ZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
-
-    
+.poster-abt {
+  background-image: url("https://img.freepik.com/free-vector/white-technology-background_23-2148403783.jpg?size=626&ext=jpg");
 }
-.poster-signin{
-    background-image:url("https://images.unsplash.com/photo-1559056961-1f4dbbf9d36a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZ2lufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+.poster-about {
+  background-image: url("https://img.freepik.com/free-vector/customer-survey-concept-illustration_114360-558.jpg?size=626&ext=jpg");
+  padding: 28%;
+}
 
-
+.poster-signup {
+  background-image: url("https://images.unsplash.com/photo-1542435503-956c469947f6?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjV8fHJlZ2lzdGVyJTIwd2Vic2l0ZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+}
+.poster-signin {
+  background-image: url("https://images.unsplash.com/photo-1559056961-1f4dbbf9d36a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGxvZ2lufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
 }
 .container {
-    max-width: 950px;
-    padding-bottom: 50px;
-    padding-top: 30px;
-    height:fit-content;
-    /* background-color: #ebbdc1; */
+  max-width: 950px;
+  padding-bottom: 50px;
+  padding-top: 30px;
+  height: fit-content;
+  /* background-color: #ebbdc1; */
 }
 
 .card {
-    border-radius: 1rem;
-     box-shadow: 0px -10px 0px tan;
-     height:100%;
+  border-radius: 1rem;
+  box-shadow: 0px -10px 0px tan;
+  height: 100%;
+  columns: 100%;
 }
 
-@media(max-width:767px) {
-    .card {
-        margin: 1rem 0.7rem 1rem;
-        max-width: 80vw;
-    }
+@media (max-width: 767px) {
+  .card {
+    margin: 1rem 0.7rem 1rem;
+    max-width: 80vw;
+  }
 }
-.card-image{
-    align-self:center;
+.card-image {
+  align-self: center;
 }
 img.img-fluid {
-    width: 5em;
-    height:5em;
-    
-    border-radius: 5rem;
-    margin: 1.3rem auto 1rem auto
+  width: 5em;
+  height: 5em;
+
+  border-radius: 5rem;
+  margin: 1.3rem auto 1rem auto;
 }
 
 .col-md-4 {
-    padding: 0 0.5rem;
-    height:fit-content;
+  padding: 0 0.5rem;
+  height: fit-content;
 }
 
 .card-title {
-    font-size: 1rem;
-    margin-bottom: 0;
-    font-weight: bold;
-    font-family: 'IM Fell French Canon SC'
+  font-size: 1rem;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-family: "IM Fell French Canon SC";
 }
 
 .card-text {
-    text-align: center;
-    padding: 1rem 2rem;
-    font-size: 0.8rem;
-    color: rgb(82, 81, 81);
-    line-height: 1.4rem
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.8rem;
+  color: rgb(82, 81, 81);
+  line-height: 1.4rem;
 }
 
 .footer {
-    border-top: none;
-    text-align: center;
-    line-height: 1.2rem;
-    padding: 2rem 0 1.4rem 0;
-    font-family: 'Varela Round'
+  border-top: none;
+  text-align: center;
+  line-height: 1.2rem;
+  padding: 2rem 0 1.4rem 0;
+  font-family: "Varela Round";
 }
 
 #name {
-    font-size: 0.8rem;
-    font-weight: bold
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 #position {
-    font-size: 0.7rem
+  font-size: 0.7rem;
 }
 
-.col-md-4
-{
-    padding-left: 20px;
+.col-md-4 {
+  padding-left: 20px;
 }
 
-.about{
+.about {
+  height: 325px;
+  /*margin: auto;*/
+  text-align: center;
 
-    height: 325px;
-    /*margin: auto;*/
-    text-align: center;
-  
-    padding: 40px;
-    width:fit-content;
-   /* background-image:linear-gradient( #dae7f0,#9ec3d4);*/
+  padding: 40px;
+  width: fit-content;
+  /* background-image:linear-gradient( #dae7f0,#9ec3d4);*/
 }
 
-.end
-{
-    height: 310px;
-    padding-top: 50px;
-    background-color:rgb(220, 20, 20);
-    color:white;
+.end {
+  height: 310px;
+  padding-top: 50px;
+  background-color: rgb(220, 20, 20);
+  color: white;
 }
 
-.find
-{
-    width: 35%;
-    padding: 10px;
+.find {
+  width: 35%;
+  padding: 10px;
 }
 
-.mail{
-
-    width: 35%;
-    padding: 10px;
+.mail {
+  width: 35%;
+  padding: 10px;
 }
 
-
-h2{
-    text-align: center;
-    padding: 20px;
+h2 {
+  text-align: center;
+  padding: 20px;
 }
 
 .cols {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
-  }
-  
-  /* Remove extra left and right margins, due to padding in columns */
-  .rows {
-      margin: 0 -5px;
-      padding: 20px 20px 30px 20px;
-      background-image:linear-gradient(#ebbdc1, #ebbdc1);
-      
-     /* background-color: #e3f2fd;*/
-      
-    }
-  
-  /* Clear floats after the columns */
-  .rows:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
 
-  /* Style the counter cards */
-  .cards {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
-    text-align: center;
-    background-color: white;
-    border-radius: 10px;
-  }
-  
-  /* Responsive columns - one column layout (vertical) on small screens */
-  @media screen and (max-width: 600px) {
-    .cols {
-      width: 100%;
-      display: flexbox;
-      margin-bottom: 20px;
-    }
-  }
+/* Remove extra left and right margins, due to padding in columns */
+.rows {
+  margin: 0 -5px;
+  padding: 20px 20px 30px 20px;
+  background-image: linear-gradient(#ebbdc1, #ebbdc1);
 
-  .video{
-   
-    margin: auto;
+  /* background-color: #e3f2fd;*/
+}
+
+/* Clear floats after the columns */
+.rows:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.cards {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .cols {
+    width: 100%;
+    display: flexbox;
+    margin-bottom: 20px;
+  }
+}
+
+.video {
+  margin: auto;
   width: 100%;
-  height:100%;
+  height: 100%;
   border-radius: 20px;
   padding: 8%;
   align-items: center;
-
 }
-.foot-img{
-    width:2.5em;
-    height:2.5em;
-    margin:1px;
+.foot-img {
+  width: 2.5em;
+  height: 2.5em;
+  margin: 1px;
 }
-.form{
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" 
+.form {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" 
       effect */
-      padding: 16px;
-    text-align: center;
-    background-color: white;
-    border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
 }
-.abtform{
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" 
+.abtform {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" 
       effect */
-      padding: 16px;
-    text-align: center;
-    /* background-color: white; */
-    border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  /* background-color: white; */
+  border-radius: 10px;
 }

@@ -1,10 +1,10 @@
 import { useStateValue } from "../StateProvider";
 import React from "react";
-import Homie from './Home1';
-import {Button} from 'react-bootstrap'
+import Homie from "./Home1";
+import { Button } from "react-bootstrap";
 
 import * as routes from "../constants/routes";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import * as routes from "../constants/routes";
 
@@ -18,18 +18,29 @@ function Home() {
 
   return (
     <div>
-      <Homie/>        
+      <Homie />
       <br />
-      {finishedSetup ? (<>
-        "welcome to attendlt"
-        </>
+      {finishedSetup ? (
+        <>"welcome to attendlt"</>
       ) : (
         <>
           <br />
-             <div className="footer">
-        <Link to ={routes.ENROLL}><Button variant ="primary" style={{color:'white',width:'40%',height:'200%',position:'relative', 'box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Enroll Yourself 
-        </Button></Link>
-    </div>
+          <div className="footer">
+            <Link to={routes.ENROLL}>
+              <Button
+                variant="primary"
+                style={{
+                  color: "white",
+                  width: "40%",
+                  height: "200%",
+                  position: "relative",
+                  "box-shadow": "inset 0 0.2 0.2 0.8 grey",
+                }}
+              >
+                Enroll Yourself
+              </Button>
+            </Link>
+          </div>
           <br />
         </>
       )}
