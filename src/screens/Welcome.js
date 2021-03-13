@@ -84,7 +84,7 @@ function Welcome() {
        <div className="about">
                 <h2>Here Are Few Of The Testimonials For {tagline}:Attendance System</h2> </div>
           <div className="footer">
-        <Link to ={routes.ABOUT}><Button variant ="primary" style={{background:'pink',color:'white',width:'40%',height:'2000%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Testimonials
+        <Link to ={routes.ABOUT}><Button variant ="primary" style={{background:'lightblue',width:'40%',height:'2000%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Testimonials
         </Button></Link>
     </div>
       </div>
