@@ -35,13 +35,14 @@
 
 .card {
     border-radius: 1rem;
-     box-shadow: 0px -10px 0px crimson;
+     box-shadow: 0px -10px 0px tan;
+     height:100%;
 }
 
 @media(max-width:767px) {
     .card {
         margin: 1rem 0.7rem 1rem;
-        max-width: 80vw
+        max-width: 80vw;
     }
 }
 .card-image{
