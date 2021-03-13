@@ -23,49 +23,53 @@ function Signin() {
   return (
     <div className="poster-signin">
       <div className="container mt-4" style={{ width: "70%", padding: "10%" }}>
-          <div className="form">
-        <h2
-          style={{ color: "grey", textAlign: "center", textDecoration: "bold" }}
-        >
-          Welcome to The Attendlt!
-        </h2>
-        <h3
-          style={{
-            color: "#ff3300",
-            textAlign: "center",
-            textDecoration: "bold",
-          }}
-        >
-          To Login In Your Account, Fill the following details!
-        </h3>
-        <Form onSubmit={handleSubmit} className="form">
-          <Form.Group>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Button
-            type="submit"
-            style={{ width: "45%", background: "#ff3300" }}
+        <div className="form">
+          <h2
+            style={{
+              color: "grey",
+              textAlign: "center",
+              textDecoration: "bold",
+            }}
           >
-            Login
-          </Button>
-        </Form>
-      </div>
+            Welcome to The Attendlt!
+          </h2>
+          <h3
+            style={{
+              color: "#ff3300",
+              textAlign: "center",
+              textDecoration: "bold",
+            }}
+          >
+            To Login In Your Account, Fill the following details!
+          </h3>
+          <Form onSubmit={handleSubmit} className="form">
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              type="submit"
+              style={{ width: "45%", background: "#ff3300" }}
+            >
+              Login
+            </Button>
+          </Form>
+        </div>
       </div>
     </div>
   );
