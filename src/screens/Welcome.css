@@ -29,6 +29,7 @@
     max-width: 950px;
     padding-bottom: 50px;
     padding-top: 30px;
+    height:fit-content;
     /* background-color: #ebbdc1; */
 }
 
@@ -55,7 +56,8 @@ img.img-fluid {
 }
 
 .col-md-4 {
-    padding: 0 0.5rem
+    padding: 0 0.5rem;
+    height:fit-content;
 }
 
 .card-title {

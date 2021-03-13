@@ -17,7 +17,7 @@ function T() {
         <div id="test" className="container">
             <div className="row">
                 <div className="col-md-4">
-                    <div className="card d-flex mx-auto">
+                    <div className="card d-flex mx-auto"  style={{height:"fit-content"}}>
                         <div className="card-image">
                             {" "}
                             <img
@@ -45,7 +45,7 @@ function T() {
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <div className="card d-flex mx-auto">
+                    <div className="card d-flex mx-auto" style={{height:"fit-content"}}>
                         <div className="card-image">
                             {" "}
                             <img
@@ -56,8 +56,8 @@ function T() {
                         </div>
                         <div className="card-text">
                             <div className="card-title">{r}</div> Its scalable, secure and optimised for any
-                            device. Use of Firebase, made storing and retrieval of dynamic content easy and use of RegNet,
-                             the self-regulated network for image classification has made its speed commendably fast.
+                            device. Use of Firebase, made storing and retrieval of dynamic content easy and use of 68 Point 
+                            Face Landmark Detection Models has made its speed commendably fast.
               </div>
                         <div className="footer">
                             {" "}
@@ -74,7 +74,7 @@ function T() {
                     </div>
                 </div>
                 <div className="col-md-4">
-                    <div className="card d-flex mx-auto ">
+                    <div className="card d-flex mx-auto " style={{height:"fit-content"}}>
                         <div className="card-image">
                             {" "}
                             <img className="img-fluid" src={pic} alt="Shreyash Kadu" />{" "}
