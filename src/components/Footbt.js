@@ -6,7 +6,7 @@ import * as routes from "../constants/routes";
 function Footbtn() {
   return (<>
     <div className="footer">
-        <Link to ={routes.SIGNUP}><Button variant ="primary" style={{background:'teal',color:'white',width:'40%',height:'200%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Register Yourself 
+        <Link to ={routes.SIGNUP}><Button variant ="primary" style={{background:'white',color:'white',width:'40%',height:'200%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Register Yourself 
         </Button></Link>
     </div>
   </>);

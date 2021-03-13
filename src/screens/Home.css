@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  /* color:whitesmoke; */
 }
 body,
 html {
@@ -131,9 +132,9 @@ span {
   box-sizing: border-box;
   text-align: center;
 }
-.button {
-  background-color: crimson; /* Green */
-  border-radius: 10px;
+/* .button{
+    background-color: crimson; Green
+  border-radius:10px;
   color: white;
   padding: 15px 32px;
   margin: 2em;
@@ -142,4 +143,4 @@ span {
   display: inline-block;
   font-size: 3em;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-}
+} */

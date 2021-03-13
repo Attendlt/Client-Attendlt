@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
 import "./Welcome.css";
-
-function EmailAuth() {
+function Signup() {
+  const [name, setName] = useState(null);
+  const [InsId, setInsId] = useState(null);
   const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
+    if (name && email && password && InsId) {
       await auth
-        .createUserWithEmailAndPassword(email)
+        .createUserWithEmailAndPassword(email, password)
         .then(async (authUser) => {
           if (authUser) {
             const uid = authUser?.user?.uid;
 
             db.collection("users").doc(uid).set({
+              name: name,
               finishedSetup: false,
               features: null, // means get the institute id and face features of the student
+              collegeId: InsId,
             });
           }
         })
@@ -39,9 +44,29 @@ function EmailAuth() {
               textDecoration: "bold",
             }}
           >
-            You need to verify your email first to register!
+            You need to fill the following details to register!
           </h3>
           <Form onSubmit={handleSubmit} className="form">
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Institute ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter InstituteID"
+                value={InsId}
+                onChange={(e) => setInsId(e.target.value)}
+              />
+            </Form.Group>
+
             <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -52,11 +77,20 @@ function EmailAuth() {
               />
             </Form.Group>
 
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
             <Button
               type="submit"
               style={{ width: "45%", background: "#ff3300" }}
             >
-              Verify
+              Register
             </Button>
           </Form>
         </div>
@@ -65,4 +99,4 @@ function EmailAuth() {
   );
 }
 
-export default EmailAuth;
+export default Signup;
