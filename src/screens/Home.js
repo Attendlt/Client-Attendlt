@@ -27,7 +27,7 @@ function Home() {
         <>
           <br />
              <div className="footer">
-        <Link to ={routes.ENROLL}><Button variant ="primary" style={{color:'white',width:'40%',height:'200%',position:'relative','box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Enroll Yourself 
+        <Link to ={routes.ENROLL}><Button variant ="primary" style={{color:'white',width:'40%',height:'200%',position:'relative', 'box-shadow': 'inset 0 0.2 0.2 0.8 grey'}}>Enroll Yourself 
         </Button></Link>
     </div>
           <br />
