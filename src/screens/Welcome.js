@@ -69,7 +69,7 @@ function Welcome() {
           </div>
         </div>
       </div>
-      <div className="video">
+      {/* <div className="video">
         <video width={350} height={300} controls>
           <source
             src="https://wordpress-375262-1702015.cloudwaysapps.com/wp-content/uploads/2021/01/truein-attendance-demo-1.mp4"
@@ -77,7 +77,7 @@ function Welcome() {
           />
           Your browser does not support the video tag.
         </video>
-      </div>
+      </div> */}
       {/* testimonial button section */}
       <div className="poster-abt">
 
