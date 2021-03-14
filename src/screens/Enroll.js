@@ -4,10 +4,19 @@ import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
-import './ED.css';
+import "./ED.css";
+import LinearProgress from "@material-ui/core/LinearProgress";
+// import MuiAlert from "@material-ui/lab/Alert";
+// import Snackbar from "@material-ui/core/Snackbar";
+
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
+
 function Enroll() {
   const [{ name, uid, features }, dispatch] = useStateValue();
   const history = useHistory();
+  // const [openSnackBar, setOpenSnackBar] = useState(false);
 
   useEffect(() => {
     // const initialSetup = async () => {
@@ -94,6 +103,7 @@ function Enroll() {
         }
         if (descriptions.length > 25) {
           stopStream();
+          // setOpenSnackBar(true);
           clearInterval(interval);
         }
 
@@ -166,7 +176,21 @@ function Enroll() {
     <Redirect to={routes.HOME} />
   ) : (
     <div className="vid">
-      <video autoPlay={true} muted={true} id="video" />
+      <LinearProgress />
+
+      <div className="enroll_vid">
+        <video autoPlay={true} muted={true} id="video" />
+      </div>
+
+      {/* <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackBar(false)}
+      >
+        <Alert onClose={() => setOpenSnackBar(false)} severity="success">
+          Enrolled <em>Successfully!!</em>
+        </Alert>
+      </Snackbar> */}
     </div>
   );
 }

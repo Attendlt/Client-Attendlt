@@ -17,6 +17,7 @@ import Signup from "./screens/Signup";
 import About from "./screens/About";
 import FooterPage from "./components/Footer";
 import Head from "./components/Header";
+import "./App.css";
 
 function App() {
   const [{ uid, features }, dispatch] = useStateValue();
@@ -80,60 +81,62 @@ function App() {
     return () => {};
   }, [dispatch]);
 
-  return (<div className="classypeople">
-    <Router>
-      <Head />
+  return (
+    <div className="classypeople">
+      <Router>
+        <Head />
 
-      <Switch>
-        <Route exact path={routes.ABOUT}>
-          <About />
-        </Route>
+        <Switch>
+          <Route exact path={routes.ABOUT}>
+            <About />
+          </Route>
 
-        {uid ? (
-          <>
-            {features && (
-              <Route exact path={routes.DETECT}>
-                <Detect />
+          {uid ? (
+            <>
+              {features && (
+                <Route exact path={routes.DETECT}>
+                  <Detect />
+                </Route>
+              )}
+
+              {!features && (
+                <Route exact path={routes.ENROLL}>
+                  <Enroll />
+                </Route>
+              )}
+
+              <Route exact path={routes.HOME}>
+                <Home />
               </Route>
-            )}
 
-            {!features && (
-              <Route exact path={routes.ENROLL}>
-                <Enroll />
+              <Redirect to={routes.HOME}>
+                <Home />
+              </Redirect>
+            </>
+          ) : (
+            <>
+              <Route path={routes.SIGNIN}>
+                <Signin />
               </Route>
-            )}
 
-            <Route exact path={routes.HOME}>
-              <Home />
-            </Route>
+              <Route path={routes.SIGNUP}>
+                <Signup />
+              </Route>
 
-            <Redirect to={routes.HOME}>
-              <Home />
-            </Redirect>
-          </>
-        ) : (
-          <>
-            <Route path={routes.SIGNIN}>
-              <Signin />
-            </Route>
+              <Route exact path={routes.WELCOME}>
+                <Welcome />
+              </Route>
 
-            <Route path={routes.SIGNUP}>
-              <Signup />
-            </Route>
+              <Redirect to={routes.WELCOME}>
+                <Welcome />
+              </Redirect>
+            </>
+          )}
+        </Switch>
 
-            <Route exact path={routes.WELCOME}>
-              <Welcome />
-            </Route>
-
-            <Redirect to={routes.WELCOME}>
-              <Welcome />
-            </Redirect>
-          </>
-        )}
-      </Switch>
-
-      <FooterPage />
-    </Router></div>
+        <FooterPage />
+      </Router>
+    </div>
   );
 }
 

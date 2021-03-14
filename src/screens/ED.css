@@ -1,4 +1,10 @@
+.enroll_vid,
+.detect_vid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .vid {
   flex: 1;
-  margin: auto;
 }

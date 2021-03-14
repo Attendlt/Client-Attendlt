@@ -5,7 +5,10 @@ import { useStateValue } from "../StateProvider";
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
-import './ED.css';
+import "./ED.css";
+import LinearProgress from "@material-ui/core/LinearProgress";
+// import MuiAlert from "@material-ui/lab/Alert";
+// import Snackbar from "@material-ui/core/Snackbar";
 
 /**
  * use useState to store 5 frames detected from camera, after that
@@ -17,10 +20,15 @@ import './ED.css';
  * first fetch the features dataset from the firestore if not present
  * in the datalayer, then apply the above function
  */
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 function Detect() {
   const [{ uid, features, name }, dispatch] = useStateValue();
   const history = useHistory();
+
+  // const [openSnackBar, setOpenSnackBar] = useState(false);
 
   useEffect(() => {
     // database queries
@@ -234,6 +242,7 @@ function Detect() {
 
             try {
               saveAttendance();
+              // setOpenSnackBar(true);
             } catch (err) {
               console.log(err);
             }
@@ -263,7 +272,21 @@ function Detect() {
 
   return (
     <div className="vid">
-      <video autoPlay={true} muted={true} id="video" />
+      <LinearProgress />
+
+      <div className="detect_vid">
+        <video autoPlay={true} muted={true} id="video" />
+      </div>
+
+      {/* <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackBar(false)}
+      >
+        <Alert onClose={() => setOpenSnackBar(false)} severity="success">
+          Attendance marked <em>Successfully!!</em>
+        </Alert>
+      </Snackbar> */}
     </div>
   );
 }

@@ -104,8 +104,8 @@ function Signup() {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label style={{ paddingRight: "5%" }}>
-                Select Your Institute ID :{" "}
+              <Form.Label style={{ paddingRight: "15%" }}>
+                Select Your Institute ID :
               </Form.Label>
 
               <Select
@@ -116,6 +116,7 @@ function Signup() {
                 onOpen={handleOpen}
                 value={InsId}
                 onChange={handleChange}
+                style={{ width: "50%" }}
               >
                 {institutesOnce.map((institute) => (
                   <MenuItem value={institute.instituteId} key={institute.id}>
