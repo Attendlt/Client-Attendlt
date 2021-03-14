@@ -6,28 +6,27 @@ import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
 
 function Enroll() {
-  const [{ name, uid, finishedSetup }, dispatch] = useStateValue();
+  const [{ name, uid, features }, dispatch] = useStateValue();
   const history = useHistory();
 
   useEffect(() => {
-    const initialSetup = async () => {
-      if (!name) {
-        var data = await db.collection("users").doc(uid).get();
+    // const initialSetup = async () => {
+    //   if (!name) {
+    //     var data = await db.collection("users").doc(uid).get();
 
-        if (data.exists) {
-          data = data.data();
+    //     if (data.exists) {
+    //       data = data.data();
 
-          dispatch({
-            type: "SET_USER",
-            features: data.features,
-            name: data.name,
-            collegeId: data.collegeId,
-            finishedSetup: data.finishedSetup,
-          });
-        }
-      }
-    };
-    initialSetup();
+    //       dispatch({
+    //         type: "SET_USER",
+    //         name: data.name,
+    //         collegeId: data.collegeId,
+    //         finishedSetup: data.finishedSetup,
+    //       });
+    //     }
+    //   }
+    // };
+    // initialSetup();
 
     var video = document.querySelector("#video");
 
@@ -64,11 +63,10 @@ function Enroll() {
         );
 
         await db
-          .collection("users")
+          .collection("features")
           .doc(uid)
-          .update({
+          .set({
             features: JSONstringLabeledFaceDescriptors,
-            finishedSetup: true,
           })
           .then(() => {
             console.log("data saved");
@@ -76,7 +74,6 @@ function Enroll() {
             dispatch({
               type: "SET_FEATURES",
               features: JSONstringLabeledFaceDescriptors,
-              finishedSetup: true,
             });
           })
           .catch((e) => console.log("Caused a firebase error: ", e));
@@ -120,7 +117,7 @@ function Enroll() {
       }, 100);
     };
 
-    if (!finishedSetup) {
+    if (!features) {
       const startVideo = () => {
         var constraints = {
           audio: false,
@@ -158,12 +155,14 @@ function Enroll() {
     // }
 
     return () => {
-      video.removeEventListener("playing", onVideoStarted);
+      if (video) {
+        video.removeEventListener("playing", onVideoStarted);
+      }
       history.push(routes.HOME);
     };
-  }, [finishedSetup, dispatch, name, uid, history]);
+  }, [features, dispatch, name, uid, history]);
 
-  return finishedSetup ? (
+  return features ? (
     <Redirect to={routes.HOME} />
   ) : (
     <div>

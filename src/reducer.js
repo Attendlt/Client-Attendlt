@@ -25,7 +25,6 @@ const reducer = (state, action) => {
     case actionTypes.SET_USER:
       return {
         ...state,
-        features: action.features,
         name: action.name,
         collegeId: action.collegeId,
         finishedSetup: action.finishedSetup,
@@ -35,7 +34,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         features: action.features,
-        finishedSetup: true,
       };
 
     default:

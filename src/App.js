@@ -19,7 +19,7 @@ import FooterPage from "./components/Footer";
 import Head from "./components/Header";
 
 function App() {
-  const [{ uid, finishedSetup }, dispatch] = useStateValue();
+  const [{ uid, features }, dispatch] = useStateValue();
 
   useEffect(() => {
     async function startupFunc() {
@@ -43,10 +43,20 @@ function App() {
 
                   dispatch({
                     type: "SET_USER",
-                    features: data.features,
                     name: data.name,
                     collegeId: data.collegeId,
                     finishedSetup: data.finishedSetup,
+                  });
+                }
+
+                data = await db.collection("features").doc(uid).get();
+
+                if (data.exists) {
+                  data = data.data();
+
+                  dispatch({
+                    type: "SET_FEATURES",
+                    features: data?.features,
                   });
                 }
               } catch (e) {
@@ -81,13 +91,13 @@ function App() {
 
         {uid ? (
           <>
-            {finishedSetup && (
+            {features && (
               <Route exact path={routes.DETECT}>
                 <Detect />
               </Route>
             )}
 
-            {!finishedSetup && (
+            {!features && (
               <Route exact path={routes.ENROLL}>
                 <Enroll />
               </Route>

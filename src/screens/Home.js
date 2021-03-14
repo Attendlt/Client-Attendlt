@@ -14,13 +14,13 @@ import { Link } from "react-router-dom";
  */
 
 function Home() {
-  const [{ finishedSetup }] = useStateValue();
+  const [{ features }] = useStateValue();
 
   return (
     <div>
       <Homie />
       <br />
-      {finishedSetup ? (
+      {features ? (
         <>"welcome to attendlt"</>
       ) : (
         <>

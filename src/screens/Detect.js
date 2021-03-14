@@ -23,28 +23,24 @@ function Detect() {
 
   useEffect(() => {
     // database queries
-    async function checkFeatures() {
-      if (features === null) {
-        try {
-          var data = await db.collection("users").doc(uid).get();
-          if (data.exists) {
-            data = data.data();
+    // async function checkFeatures() {
+    //   if (features === null) {
+    //     try {
+    //       var data = await db.collection("features").doc(uid).get();
+    //       if (data.exists) {
+    //         data = data.data();
 
-            dispatch({
-              type: "SET_USER",
-              features: data.features,
-              name: data.name,
-              collegeId: data.collegeId,
-              finishedSetup: data.finishedSetup,
-            });
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    }
-    checkFeatures();
-
+    //         dispatch({
+    //           type: "SET_FEATURES",
+    //           features: data.features,
+    //         });
+    //       }
+    //     } catch (e) {
+    //       console.log(e);
+    //     }
+    //   }
+    // }
+    // checkFeatures();
     var video = document.querySelector("#video");
 
     const startVideo = () => {

@@ -9,7 +9,7 @@ import "./header.css";
 let tagline = <span style={{ color: "red" }}>Attendlt</span>;
 
 function Head() {
-  const [{ uid, finishedSetup }] = useStateValue();
+  const [{ uid, features }] = useStateValue();
 
   const handleSignout = () => {
     auth.signOut();
@@ -32,7 +32,7 @@ function Head() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               {uid ? (
-                finishedSetup ? (
+                features ? (
                   <Nav.Link>
                     <Link to={routes.DETECT} className="head_navlink">
                       Take Attendance
