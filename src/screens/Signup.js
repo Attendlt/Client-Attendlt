@@ -1,17 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import "./Welcome.css";
-
+import { useStateValue } from "../StateProvider";
 
 function Signup() {
   const [name, setName] = useState(null);
   const [InsId, setInsId] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-   const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+
+  const [institutesOnce, setInstitutesOnce] = useState([]);
+  const [{ institutes }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const getInstitutes = async () => {
+      if (institutes.length === 0) {
+        await db
+          .collection("institutes")
+          .get()
+          .then((snapshots) => {
+            setInstitutesOnce(
+              snapshots.docs.map((doc) => ({
+                id: doc.id,
+                instituteId: doc.data().instituteId,
+              }))
+            );
+          })
+          .catch((err) => console.log(err));
+
+        dispatch({
+          type: "SET_INSTITUTES",
+          institutes: institutesOnce,
+        });
+      } else {
+        setInstitutesOnce(institutes);
+      }
+    };
+
+    getInstitutes();
+    return () => {};
+  }, [institutesOnce, dispatch, institutes]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,23 +104,25 @@ function Signup() {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label style={{paddingRight:'5%'}}>Select Your Institute ID : </Form.Label> 
-        <Select
-          labelId="demo-controlled-open-select-label"
-          id="demo-controlled-open-select"
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={InsId}
-          onChange={handleChange}
-        >
-          <MenuItem value="">
-            <em>0</em>
-          </MenuItem>
-          <MenuItem value={1119184}>11191684</MenuItem>
-          <MenuItem value={1119185}>11191685</MenuItem>
-          <MenuItem value={1119186}>11191686</MenuItem>
-        </Select>
+              <Form.Label style={{ paddingRight: "5%" }}>
+                Select Your Institute ID :{" "}
+              </Form.Label>
+
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={InsId}
+                onChange={handleChange}
+              >
+                {institutesOnce.map((institute) => (
+                  <MenuItem value={institute.instituteId} key={institute.id}>
+                    <em>{institute.instituteId}</em>
+                  </MenuItem>
+                ))}
+              </Select>
             </Form.Group>
 
             <Form.Group>

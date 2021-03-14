@@ -4,12 +4,14 @@ export const initialState = {
   name: null,
   collegeId: null,
   finishedSetup: false,
+  institutes: [],
 };
 
 export const actionTypes = {
   SET_UID: "SET_UID",
   SET_USER: "SET_USER",
   SET_FEATURES: "SET_FEATURES",
+  SET_INSTITUTES: "SET_INSTITUTES",
 };
 
 const reducer = (state, action) => {
@@ -34,6 +36,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         features: action.features,
+      };
+
+    case actionTypes.SET_INSTITUTES:
+      return {
+        ...state,
+        institutes: action.institutes,
       };
 
     default:
