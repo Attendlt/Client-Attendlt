@@ -1,0 +1,4 @@
+.classypeople{
+ display:flex;
+ flex-direction: column;
+}

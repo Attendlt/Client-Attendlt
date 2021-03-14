@@ -80,7 +80,7 @@ function App() {
     return () => {};
   }, [dispatch]);
 
-  return (
+  return (<div className="classypeople">
     <Router>
       <Head />
 
@@ -133,7 +133,7 @@ function App() {
       </Switch>
 
       <FooterPage />
-    </Router>
+    </Router></div>
   );
 }
 

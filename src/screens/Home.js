@@ -21,7 +21,7 @@ function Home() {
       <Homie />
       <br />
       {features ? (
-        <>"welcome to attendlt"</>
+        <> <h2>Welcome to The Attendlt!</h2></>
       ) : (
         <>
           <br />

@@ -5,6 +5,7 @@ import { useStateValue } from "../StateProvider";
 import firebase from "firebase";
 import { useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
+import './ED.css';
 
 /**
  * use useState to store 5 frames detected from camera, after that
@@ -261,7 +262,7 @@ function Detect() {
   }, [features, name, history, uid]);
 
   return (
-    <div>
+    <div className="vid">
       <video autoPlay={true} muted={true} id="video" />
     </div>
   );

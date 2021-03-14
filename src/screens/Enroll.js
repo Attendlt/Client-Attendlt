@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { useStateValue } from "../StateProvider";
 import { Redirect, useHistory } from "react-router-dom";
 import * as routes from "../constants/routes";
-
+import './ED.css';
 function Enroll() {
   const [{ name, uid, features }, dispatch] = useStateValue();
   const history = useHistory();
@@ -165,7 +165,7 @@ function Enroll() {
   return features ? (
     <Redirect to={routes.HOME} />
   ) : (
-    <div>
+    <div className="vid">
       <video autoPlay={true} muted={true} id="video" />
     </div>
   );
