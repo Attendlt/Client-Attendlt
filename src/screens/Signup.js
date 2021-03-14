@@ -72,7 +72,7 @@ function Signup() {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label style={{paddingRight:'5%'}}>Select Your Institute ID : </Form.Label> 
+              <Form.Label style={{paddingRight:'15%'}}>Select Your Institute ID : </Form.Label> 
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
@@ -81,9 +81,11 @@ function Signup() {
           onOpen={handleOpen}
           value={InsId}
           onChange={handleChange}
+        style={{width:'50%'}}
+        
         >
           <MenuItem value="">
-            <em>0</em>
+            <em>Select</em>
           </MenuItem>
           <MenuItem value={1119184}>11191684</MenuItem>
           <MenuItem value={1119185}>11191685</MenuItem>
