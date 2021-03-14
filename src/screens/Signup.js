@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { Form, Button } from "react-bootstrap";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import "./Welcome.css";
+
+
 function Signup() {
   const [name, setName] = useState(null);
   const [InsId, setInsId] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+   const [open, setOpen] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +32,17 @@ function Signup() {
         .catch((err) => console.log(err));
     }
   };
+  const handleChange = (event) => {
+    setInsId(event.target.value);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <>
       <div className="poster-signup">
@@ -57,13 +72,23 @@ function Signup() {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Institute ID</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter InstituteID"
-                value={InsId}
-                onChange={(e) => setInsId(e.target.value)}
-              />
+              <Form.Label style={{paddingRight:'5%'}}>Select Your Institute ID : </Form.Label> 
+        <Select
+          labelId="demo-controlled-open-select-label"
+          id="demo-controlled-open-select"
+          open={open}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          value={InsId}
+          onChange={handleChange}
+        >
+          <MenuItem value="">
+            <em>0</em>
+          </MenuItem>
+          <MenuItem value={1119184}>11191684</MenuItem>
+          <MenuItem value={1119185}>11191685</MenuItem>
+          <MenuItem value={1119186}>11191686</MenuItem>
+        </Select>
             </Form.Group>
 
             <Form.Group>
